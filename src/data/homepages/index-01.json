@@ -5,32 +5,32 @@
             "section": "hero-area",
             "headings": [
                 {
-                    "id":1,
-                    "content":"MaxCoach is the lifebuoy"
+                    "id": 1,
+                    "content": "Ирээдүйгээ төлөвлхөд туслах хамгийн шилдэг хөтөч"
                 },
                 {
-                    "id":2,
-                    "content":"In Mentoring <br>2B a Better You."
+                    "id": 2,
+                    "content": "БОД, СУДАЛ, СОНГО"
                 }
             ],
             "texts": [
                 {
-                    "id":1,
-                    "content":"The right mentoring relationship can be a powerful tool for professional growth. Bark up the right tree."
+                    "id": 1,
+                    "content": "Судалгаанаас үзэхэд 65-70 насласан хүн амьдралынхаа бараг 40 жилийг өөрийн сонгосон мэргэжилдээ зориулдаг байна. Иймээс мэргэжил сонгох гэдэг нь санамсаргүй зүйл байх ёсгүй."
                 }
             ],
             "buttons": [
                 {
-                    "id":1,
+                    "id": 1,
                     "path": "/start-here",
-                    "content":"Download free guide",
+                    "content": "Download free guide",
                     "icon": "far fa-download"
                 }
             ],
             "images": [
                 {
-                    "id":1,
-                    "src": "/images/intro/intro1/bg-1.jpg"
+                    "id": 1,
+                    "src": "/images/intro/intro1/cover.png"
                 }
             ]
         },
@@ -38,7 +38,7 @@
             "section": "service-area",
             "section_title": {
                 "title": "Online <span>Coaching Lessons</span> For Remote Learning.",
-                "subtitle":"Education for everyone"
+                "subtitle": "Education for everyone"
             },
             "items": [
                 {
@@ -107,12 +107,12 @@
                     "src": "/images/others/teracher-quote-1.jpg"
                 }
             ]
-        }, 
+        },
         {
             "section": "funfact-area",
             "section_title": {
                 "title": "Learn the secrets to <span>Life Success</span>, <br/>these people have got the key.​",
-                "subtitle":"MAXIMIZE YOUR POTENTIALS and possibilities"
+                "subtitle": "MAXIMIZE YOUR POTENTIALS and possibilities"
             },
             "items": [
                 {
@@ -133,7 +133,7 @@
                     "counter": 100
                 }
             ]
-        }, 
+        },
         {
             "section": "testimonial-area",
             "items": [
@@ -171,12 +171,12 @@
                     ]
                 }
             ]
-        }, 
+        },
         {
             "section": "video-area",
             "section_title": {
                 "title": "Learn with all your <span>SENSES​</span>",
-                "subtitle":"The combination of all senses into learning"
+                "subtitle": "The combination of all senses into learning"
             },
             "images": [
                 {
@@ -192,7 +192,7 @@
             "section": "course-area",
             "section_title": {
                 "title": "Current Signature Courses",
-                "subtitle":"Learn at your Pace"
+                "subtitle": "Learn at your Pace"
             },
             "motto": {
                 "text": "Get the most dedicated consultation for your life-changing course. Earn a certification for your effort and passion",
@@ -204,7 +204,7 @@
             "section": "blog-area",
             "section_title": {
                 "title": "Secrets of learning revealed in blogs",
-                "subtitle":"study with your favorite tutors"
+                "subtitle": "study with your favorite tutors"
             },
             "motto": {
                 "text": "Get into details now?",
