@@ -1,21 +1,29 @@
 {
     "id": 22,
-    "title": "Management Skills: The Science of Leadership",
+    "title": "Хиймэл оюун ухаанаар 15 жил ажилсан туршилагаасаа хуувалцья",
     "thumbnail": {
         "src": "/images/courses/370/course-22.jpg"
     },
     "published_at": "2019-08-01T00:00:00.000Z",
     "category": "Life Style",
-    "price": 24.00,
+    "price": 24,
     "currency": "$",
     "language": "english",
     "instructor": 5,
     "duration": "10 hours",
     "total_lectures": 10,
     "total_students": 85,
-    "membership": ["silver", "gold", "diamond"],
+    "membership": [
+        "silver",
+        "gold",
+        "diamond"
+    ],
     "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "curriculum": ["chapter-01", "chapter-02", "chapter-03"],
+    "curriculum": [
+        "chapter-01",
+        "chapter-02",
+        "chapter-03"
+    ],
     "reviews": {
         "average": 4.5,
         "count": 2,
@@ -35,7 +43,7 @@
                         "src": "/images/review-author/author1.jpeg"
                     }
                 },
-                "rating": 5.0,
+                "rating": 5,
                 "title": "Cover all my needs",
                 "review": "The course identify things we want to change and then figure out the things that need to be done to create the desired outcome. The course helped me in clearly define problems and generate a wider variety of quality solutions. Support more structures analysis of options leading to better decisions."
             },

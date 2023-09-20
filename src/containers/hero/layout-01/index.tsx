@@ -1,7 +1,6 @@
-import clsx from "clsx";
+
 import { motion } from "framer-motion";
-import Button from "@ui/button";
-import CourseCard from "@components/course-card/course-01";
+
 import BottomShape from "@ui/bottom-shape/shape-01";
 import { scrollUpVariants } from "@utils/variants";
 import { useUI } from "@contexts/ui-context";
@@ -23,6 +22,7 @@ type TProps = {
     };
 };
 
+
 const HeroArea = ({
     data: { headings, texts, buttons, images, popularCourse },
 }: TProps) => {
@@ -38,6 +38,7 @@ const HeroArea = ({
                         alt={images[0]?.alt || "bg"}
                         loading="eager"
                         className="tw-w-full tw-h-full tw-object-cover"
+                        style={{ opacity: 0.2 }}
                     />
                 )}
             </div>
@@ -71,12 +72,12 @@ const HeroArea = ({
                                 {text.content}
                             </p>
                         ))}
-                        {buttons?.map(({ id, content, icon, ...rest }) => (
+                        {/* {buttons?.map(({ id, content, icon, ...rest }) => (
                             <Button key={id} className="tw-mt-3" {...rest}>
                                 <i className={clsx(icon, "tw-mr-3")} />
                                 {content}
                             </Button>
-                        ))}
+                        ))} */}
                     </motion.div>
                     <motion.div
                         className="course tw-flex tw-space-between tw-justify-center xl:tw-justify-end tw-relative tw-z-10"
@@ -128,3 +129,5 @@ const HeroArea = ({
 };
 
 export default HeroArea;
+
+

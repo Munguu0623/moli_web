@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { Typewriter } from "react-simple-typewriter";
 import Button from "@ui/button";
 import BottomShape from "@components/ui/bottom-shape/shape-02";
+import { useUI } from "@contexts/ui-context";
 import {
     ButtonType,
     HeadingType,
@@ -32,12 +33,13 @@ const HeroArea = ({
     data: { images, headings, texts, buttons, video },
 }: TProps) => {
     const [isOpen, setOpen] = useState(false);
+    const { trans1 } = useUI();
     const words =
         headings?.slice(1, headings.length).map((heading) => heading.content) ||
         [];
     return (
         <>
-            <div className="hero-area tw-relative tw-pt-[100px] tw-pb-[130px] md:tw-py-[170px] xl:tw-pt-[270px] xl:tw-pb-[248px]">
+            <div className="hero-area tw-relative tw-pt-[100px] tw-pb-[130px] md:tw-py-[170px] xl:tw-pt-[270px] xl:tw-pb-[248px]  ">
                 {images?.[0]?.src && (
                     <div className="tw-absolute tw-inset-0 -tw-z-10">
                         <img
@@ -57,26 +59,40 @@ const HeroArea = ({
                 >
                     {headings?.[0]?.content && (
                         <h1 className="tw-text-[46px] lg:tw-text-[56px] tw-leading-tight tw-font-medium tw-text-white">
-                            {headings[0].content}{" "}
+                            <div> {headings[0].content} </div>
                             <span className="tw-text-primary tw-inline-block">
                                 <Typewriter words={words} loop cursor />
                             </span>
                         </h1>
                     )}
-                    {texts?.map((text) => (
-                        <p
-                            key={text.id}
-                            className="tw-text-lg tw-font-medium tw-leading-relaxed tw-text-white tw-mb-5 sm:tw-mb-8"
-                        >
-                            {text.content}
-                        </p>
-                    ))}
+
+                    <div className="tw-w-full tw-flex tw-justify-center ">
+                        <div className="tw-w-8/12  tw-flex tw-justify-center tw-items-center">
+                            {texts?.map((text) => (
+                                <p
+                                    key={text.id}
+                                    className="tw-text-lg tw-font-medium tw-leading-relaxed tw-text-white tw-mb-5 sm:tw-mb-8"
+                                >
+                                    {text.content}
+                                </p>
+                            ))}
+                        </div>
+                    </div>
+                    <motion.div
+                        className="intro1-scene tw-absolute -tw-z-1 -tw-right-11 -tw-bottom-11 tw-w-[136px]"
+                        animate={{
+                            x: trans1().x,
+                            y: trans1().y,
+                        }}
+                    >
+                        <img
+                            src="/images/shape-animation/shape-1.png"
+                            alt=""
+                            width={136}
+                            height={136}
+                        />
+                    </motion.div>
                     <div className="tw-flex tw-items-center tw-justify-center tw-flex-wrap">
-                        {buttons?.[0] && (
-                            <Button {...buttons[0]} className="tw-m-2.5">
-                                {buttons[0].content}
-                            </Button>
-                        )}
                         {buttons?.[1] && (
                             <Button
                                 {...buttons[1]}

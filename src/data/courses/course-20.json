@@ -1,21 +1,30 @@
 {
     "id": 20,
-    "title": "Effective Time Management Mastery – Complete Guide",
+    "title": "Гагнуурчын мэргэжилээр 10 жилийн туршилагтай",
     "thumbnail": {
         "src": "/images/courses/370/course-20.jpg"
     },
     "published_at": "2019-06-01T00:00:00.000Z",
     "category": "Life Style",
-    "price": 25.00,
+    "price": 25,
     "currency": "$",
     "language": "english",
     "instructor": 5,
     "duration": "13 hours",
     "total_lectures": 8,
     "total_students": 45,
-    "membership": ["gold", "diamond"],
+    "membership": [
+        "gold",
+        "diamond"
+    ],
     "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "curriculum": ["chapter-01", "chapter-02", "chapter-03", "chapter-06", "chapter-07"],
+    "curriculum": [
+        "chapter-01",
+        "chapter-02",
+        "chapter-03",
+        "chapter-06",
+        "chapter-07"
+    ],
     "reviews": {
         "average": 4.5,
         "count": 2,
@@ -35,7 +44,7 @@
                         "src": "/images/review-author/author1.jpeg"
                     }
                 },
-                "rating": 5.0,
+                "rating": 5,
                 "title": "Cover all my needs",
                 "review": "The course identify things we want to change and then figure out the things that need to be done to create the desired outcome. The course helped me in clearly define problems and generate a wider variety of quality solutions. Support more structures analysis of options leading to better decisions."
             },

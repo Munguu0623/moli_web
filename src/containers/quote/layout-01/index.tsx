@@ -21,7 +21,7 @@ const QuoteArea = ({ data: { items }, space, bg }: TProps) => {
         return {
             slidesPerView: 1,
             slidesPerGroup: 1,
-            speed: 1000,
+            speed: 2000,
             spaceBetween: 0,
         };
     }, []);
@@ -35,7 +35,7 @@ const QuoteArea = ({ data: { items }, space, bg }: TProps) => {
                         options={options}
                         initial="offscreen"
                         whileInView="onscreen"
-                        viewport={{ once: true, amount: 0.1 }}
+                        viewport={{ once: true, amount: 1 }}
                         variants={scrollUpVariants}
                     >
                         {items.map((item) => (

@@ -37,9 +37,9 @@ const LoginRegister: PageProps = () => {
                     currentPage="Profile"
                     showTitle={false}
                 />
-                <div className="tw-container tw-pb-15 md:tw-pb-20 lg:tw-pb-[100px] tw-grid tw-items-start lg:tw-grid-cols-2 tw-gap-7.5 lg:tw-gap-15">
+                <div className="tw-flex tw-justify-center  tw-bg-black">
                     <LoginForm />
-                    <RegisterForm />
+                    {/* <RegisterForm /> */}
                 </div>
             </>
         );

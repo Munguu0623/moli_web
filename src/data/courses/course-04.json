@@ -1,21 +1,29 @@
 {
     "id": 4,
-    "title": "Academic Listening and Note-taking",
+    "title": "Хүний нөөц мэргэжилээр 10 жилийн туршилагтай",
     "thumbnail": {
         "src": "/images/courses/370/course-4.jpg"
     },
     "published_at": "2018-03-01T00:00:00.000Z",
     "category": "Business",
-    "price": 85.00,
+    "price": 85,
     "currency": "$",
     "language": "english",
     "instructor": 1,
     "duration": "70 hours",
     "total_lectures": 35,
     "total_students": 67,
-    "membership": ["diamond"],
+    "membership": [
+        "diamond"
+    ],
     "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "curriculum": ["chapter-02", "chapter-03", "chapter-05", "chapter-06", "chapter-07"],
+    "curriculum": [
+        "chapter-02",
+        "chapter-03",
+        "chapter-05",
+        "chapter-06",
+        "chapter-07"
+    ],
     "reviews": {
         "average": 4.5,
         "count": 2,
@@ -35,7 +43,7 @@
                         "src": "/images/review-author/author1.jpeg"
                     }
                 },
-                "rating": 5.0,
+                "rating": 5,
                 "title": "Cover all my needs",
                 "review": "The course identify things we want to change and then figure out the things that need to be done to create the desired outcome. The course helped me in clearly define problems and generate a wider variety of quality solutions. Support more structures analysis of options leading to better decisions."
             },

@@ -30,7 +30,7 @@
             "images": [
                 {
                     "id": 1,
-                    "src": "/images/intro/intro1/cover.png"
+                    "src": "/images/intro/intro1/cover.jpg"
                 }
             ]
         },
@@ -109,28 +109,52 @@
             ]
         },
         {
-            "section": "funfact-area",
-            "section_title": {
-                "title": "Learn the secrets to <span>Life Success</span>, <br/>these people have got the key.​",
-                "subtitle": "MAXIMIZE YOUR POTENTIALS and possibilities"
-            },
+            "section": "quote-area",
             "items": [
                 {
                     "id": 1,
-                    "title": "Registered Enrolls",
-                    "suffix": "+",
-                    "counter": 3.092
+                    "name": "Цэдэвдамба Оюунгэрэл",
+                    "designation": "Улс төрч",
+                    "title": "Чамд юу ч тааралдсан, юу ч сурсан аль болох чадлынхаа хэрээр тархиныхаа хэмжээгээр шүүрч, сайн сурч авах нь маш чухал"
                 },
                 {
                     "id": 2,
-                    "title": "Finished sessions",
-                    "counter": 1.926
+                    "name": "Madley Pondor",
+                    "designation": "IT Specialist",
+                    "title": "Professional team of specialists and passionate mentors at reach"
                 },
                 {
                     "id": 3,
-                    "title": "Satisfaction rate",
+                    "name": "Luvic Dubble",
+                    "designation": "Private Tutor",
+                    "title": "I am happy with their arrangement of lessons and subjects."
+                }
+            ]
+        },
+        {
+            "section": "funfact-area",
+            "items": [
+                {
+                    "id": 1,
+                    "title": "мэргэжил бүрийн экспертүүд",
+                    "counter": 192
+                },
+                {
+                    "id": 2,
+                    "title": "мэргэжил сонгох Зөвлөгч",
+                    "counter": 29
+                },
+                {
+                    "id": 3,
+                    "title": "Мэргэжилийн танилцуулга",
+                    "suffix": "+",
+                    "counter": 200
+                },
+                {
+                    "id": 4,
+                    "title": "Мэргэжилтэй хамаарайлтай Блог",
                     "suffix": "%",
-                    "counter": 100
+                    "counter": 10
                 }
             ]
         },
@@ -191,14 +215,41 @@
         {
             "section": "course-area",
             "section_title": {
-                "title": "Current Signature Courses",
-                "subtitle": "Learn at your Pace"
+                "title": "Мэргэжилийн экспертүүдийн <span>булан</span>",
+                "subtitle": "Олон жил ажилсан туршилгатай хүмүүсээс сонгох мэргэжилээ судлая"
+            }
+        },
+        {
+            "section": "event-area",
+            "section_title": {
+                "title": "Upcoming <span>Events</span>",
+                "subtitle": "Get in contact now"
             },
             "motto": {
-                "text": "Get the most dedicated consultation for your life-changing course. Earn a certification for your effort and passion",
-                "path": "/courses/grid-01",
-                "pathText": "Get Free Guide"
+                "text": "Excited about our event?",
+                "path": "/events",
+                "pathText": "View all events "
             }
+        },
+        {
+            "section": "app-download-area",
+            "section_title": {
+                "title": "Learn on your <span>mobile</span> anytime!",
+                "subtitle": "What are you looking for?",
+                "description": "Save lessons for later and revise or write notes at any time and on multiple devices on your way. Never interfere with activities of enjoyment or other precious moments."
+            },
+            "buttons": [
+                {
+                    "id": 1,
+                    "path": "/start-here",
+                    "content": "Download Our App"
+                }
+            ],
+            "images": [
+                {
+                    "src": "/images/others/home-5-image-02.png"
+                }
+            ]
         },
         {
             "section": "blog-area",

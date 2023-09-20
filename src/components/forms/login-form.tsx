@@ -43,18 +43,18 @@ const LoginForm = () => {
 
     return (
         <div className="tw-bg-white tw-shadow-2xs tw-shadow-heading/10 tw-max-w-[470px] tw-pt-7.5 tw-pb-[50px] tw-px-[50px]">
-            <h3 className="tw-text-h2 tw-mb-5">Login</h3>
+            <h3 className="tw-text-h2 tw-mb-5">Нэвтрэх</h3>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className="tw-mb-7.5">
                     <label
                         htmlFor="username"
                         className="tw-text-heading tw-text-md"
                     >
-                        Username *
+                        Нэвтрэх нэр *
                     </label>
                     <Input
                         id="username"
-                        placeholder="Username"
+                        placeholder="Нэвтрэх нэр"
                         bg="light"
                         feedbackText={errors?.username?.message}
                         state={hasKey(errors, "username") ? "error" : "success"}
@@ -63,19 +63,18 @@ const LoginForm = () => {
                             required: "Username is required",
                         })}
                     />
-                    <small>Default Username: Admin</small>
                 </div>
                 <div className="tw-mb-7.5">
                     <label
                         htmlFor="password"
                         className="tw-text-heading tw-text-md"
                     >
-                        Password *
+                        Нууц үг *
                     </label>
                     <Input
                         id="password"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Нууц үг"
                         bg="light"
                         autoComplete="true"
                         feedbackText={errors?.password?.message}
@@ -85,11 +84,14 @@ const LoginForm = () => {
                             required: "Password is required",
                         })}
                     />
-                    <small>Default Password: Admin</small>
                 </div>
-                <Checkbox name="remember" id="remember" label="Remember me" />
+                <Checkbox
+                    name="remember"
+                    id="remember"
+                    label="хэрэглэгч хадгалах"
+                />
                 <Button type="submit" fullwidth className="tw-mt-7.5">
-                    Log In
+                    Нэвтрэх
                 </Button>
                 {serverState && <FeedbackText>{serverState}</FeedbackText>}
             </form>

@@ -28,7 +28,11 @@ const AppDownloadArea = ({
 }: TProps) => {
     const { trans1, trans2 } = useUI();
     return (
-        <Section className="app-download-area" space={space} bg={bg}>
+        <Section
+            className="app-download-area tw-bg-gray-100"
+            space={space}
+            bg={bg}
+        >
             <div className="tw-container tw-grid tw-grid-cols-1 lg:tw-grid-cols-12 tw-items-center tw-gap-[50px] lg:tw-gap-7.5">
                 <motion.div
                     className="lg:tw-col-span-7 tw-relative tw-z-10"
@@ -54,7 +58,8 @@ const AppDownloadArea = ({
                             y: trans1().y,
                         }}
                     >
-                        <Shape2 className="tw-fill-pampas tw-w-full tw-h-full" />
+                        {/* дүрс өнгө */}
+                        <Shape2 className=" tw-fill-pampas tw-w-full tw-h-full" />
                     </motion.div>
                     <motion.div
                         className="tw-absolute -tw-z-1 tw-bottom-[40%] tw-left-0 md:tw-left-[-150px]"

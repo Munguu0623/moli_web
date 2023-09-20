@@ -228,6 +228,11 @@ export interface ISpeaker {
     image: ImageType;
 }
 
+export interface UserData {
+    id: number;
+    name: string;
+    email: string;
+}
 export interface IEvent {
     title: string;
     slug: string;

@@ -1,23 +1,24 @@
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import Layout from "@layout/layout-01";
-import Wrapper from "@ui/wrapper/wrapper-01";
-import HeroArea from "@containers/hero/layout-01";
-import ServiceArea from "@containers/service/layout-01";
-import AboutArea from "@containers/about/layout-01";
-import FunFactArea from "@containers/funfact/layout-01";
-import TestimonialArea from "@containers/testimonial/layout-01";
-import VideoArea from "@containers/video/layout-01";
-import CourseArea from "@containers/course/layout-01";
-import BlogArea from "@containers/blog/layout-01";
-import BrandArea from "@containers/brand/layout-01";
-
+import Wrapper from "@ui/wrapper/wrapper-03";
+import HeroArea from "@containers/hero/layout-04";
 import { normalizedData } from "@utils/methods";
-import { IBlog, ICourse } from "@utils/types";
-
+import { IBlog, ICourse, IEvent, UserData } from "@utils/types";
 import { getPageData } from "../lib/page";
 import { getAllBlogs } from "../lib/blog";
 import { getallCourses, getFilteredCourse } from "../lib/course";
+import FunfactArea from "@containers/funfact/layout-02";
+import SEO from "@components/seo/deafult-seo";
+import BlogArea from "@containers/blog/layout-03";
+import CourseArea from "@containers/course/layout-07";
+import EventArea from "@containers/event/layout-03";
+import { getallEvents } from "lib/event";
+import BrandArea from "@containers/brand/layout-02";
+import AppDownloadArea from "@containers/app-download";
+import RegisterGuideArea from "@containers/register-guide";
+import TestimonialArea from "@containers/testimonial/layout-07";
+import { getPost } from "lib/lib/post";
 
 interface PageContent {
     section: string;
@@ -29,8 +30,8 @@ type TProps = {
             content: PageContent[];
         };
         courses: ICourse[];
-        popularCourse: ICourse;
         blogs: IBlog[];
+        events: IEvent[];
     };
 };
 
@@ -43,30 +44,47 @@ const Home: PageProps = ({ data }) => {
 
     return (
         <>
+            {/* <SEO title="Remote Training" /> */}
+            {/* Hero хэсэг */}
             <HeroArea
                 data={{
                     ...content?.["hero-area"],
-                    popularCourse: data.popularCourse,
                 }}
             />
-            <ServiceArea data={content?.["service-area"]} space="none" />
-            <AboutArea data={content?.["about-area"]} />
-            <Wrapper className="tw-py-[100px]">
-                <FunFactArea
+            {/*  Тоон үзүүлэлт */}
+            <Wrapper>
+                <FunfactArea
                     data={content?.["funfact-area"]}
-                    space="bottom-2"
-                />
-                <TestimonialArea
-                    data={content?.["testimonial-area"]}
-                    space="none"
+                    bg="tw-bg-white-catskill"
                 />
             </Wrapper>
-            <VideoArea data={content?.["video-area"]} space="none" />
+            {/* Couch Home */}
             <CourseArea
                 data={{ ...content?.["course-area"], courses: data.courses }}
+                titleSize="large"
             />
-            <BlogArea data={{ ...content?.["blog-area"], blogs: data.blogs }} />
+            {/* Блог  Home*/}
+            <BlogArea
+                data={{ ...content?.["blog-area"], blogs: data.blogs }}
+                titleSize="large"
+            />
+            {/* Events Home */}
+            <EventArea
+                data={{ ...content?.["event-area"], events: data.events }}
+                titleSize="large"
+            />
+
+            {/* сэтгэгдэл */}
+            <TestimonialArea data={content?.["testimonial-area"]} />
+            {/* Хамтран ажилдаг байгуулага */}
             <BrandArea data={content?.["brand-area"]} />
+            {/* App татах */}
+            <AppDownloadArea
+                // className=" tw-fill-pampas"
+                data={content?.["app-download-area"]}
+                titleSize="large"
+                space="top"
+            />
         </>
     );
 };
@@ -76,9 +94,21 @@ Home.Layout = Layout;
 export const getStaticProps: GetStaticProps = () => {
     const page = getPageData("home", "index-01");
     const courses = getallCourses(
-        ["title", "thumbnail", "price", "currency"],
+        [
+            "title",
+            "thumbnail",
+            "price",
+            "currency",
+            "total_lectures",
+            "total_students",
+        ],
         0,
-        3
+        6
+    );
+    const events = getallEvents(
+        ["title", "thumbnail", "start_date", "location"],
+        0,
+        4
     );
     const popularCourse = getFilteredCourse(
         [
@@ -105,6 +135,12 @@ export const getStaticProps: GetStaticProps = () => {
                 courses,
                 popularCourse,
                 blogs,
+                events,
+            },
+            layout: {
+                headerTransparent: true,
+                headerFluid: false,
+                footerMode: "light",
             },
         },
     };
