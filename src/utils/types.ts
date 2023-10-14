@@ -1,4 +1,4 @@
-export type IDType = string | number | null;
+export type IDType = number;
 
 export interface ImageType {
     src: string;
@@ -172,9 +172,8 @@ export interface ICourse {
 }
 
 export interface BlogMetaType {
-    title: string;
-    slug: string;
-    path: string;
+    id:number ;
+    name:string ;
 }
 
 export interface IBlog {
@@ -184,7 +183,7 @@ export interface IBlog {
     createdDate: string;
     modifiedDate : string;
     image: string;
-    // category: BlogMetaType;
+    category: string | undefined;
     views: number;
     authorId: IInstructor;
     content: string | null;

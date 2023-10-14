@@ -8,21 +8,24 @@ datasource db {
 }
 
 model Blogs {
-  id           Int      @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   title        String
   slug         String
   content      String?
   category     Int?
   type         String?
   authorId     Int?
-  createdDate  DateTime @default(now())
+  createdDate  DateTime  @default(now())
   modifiedDate DateTime
-  image        String   @db.VarChar(255)
+  image        String    @db.VarChar(255)
+  Category     Category? @relation(fields: [categoryId], references: [id])
+  categoryId   Int?
 }
 
 model Category {
-  id   Int    @id @default(autoincrement())
-  name String
+  id    Int     @id @default(autoincrement())
+  name  String
+  blogs Blogs[]
 }
 
 model Menu {
