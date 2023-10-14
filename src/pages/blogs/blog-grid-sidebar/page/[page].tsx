@@ -1,17 +1,16 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { ParsedUrlQuery } from "querystring";
 import SEO from "@components/seo/page-seo";
 import Layout01 from "@layout/layout-01";
 import Breadcrumb from "@components/breadcrumb";
 import BlogArea from "@containers/blog-full/layout-02";
 import { BlogMetaType, IBlog } from "@utils/types";
-import { getAllBlogs, getTags } from "../../../../lib/blog";
+import { getAllBlogs } from "../../../../lib/blog";
 
 type TProps = {
     data: {
         blogs: IBlog[];
         recentPosts: IBlog[];
-        tags: BlogMetaType[];
         currentPage: number;
         numberOfPages: number;
     };
@@ -24,7 +23,7 @@ type PageProps = NextPage<TProps> & {
 const POSTS_PER_PAGE = 8;
 
 const BlogGridSidebar: PageProps = ({
-    data: { blogs, recentPosts, tags, currentPage, numberOfPages },
+    data: { blogs, recentPosts,  currentPage, numberOfPages },
 }) => {
     return (
         <>
@@ -37,7 +36,6 @@ const BlogGridSidebar: PageProps = ({
                 data={{
                     blogs,
                     recentPosts,
-                    tags,
                     pagiData: {
                         currentPage,
                         numberOfPages,
@@ -51,8 +49,8 @@ const BlogGridSidebar: PageProps = ({
 
 BlogGridSidebar.Layout = Layout01;
 
-export const getStaticPaths: GetStaticPaths = () => {
-    const { count } = getAllBlogs([]);
+export const getStaticPaths: GetStaticPaths = async() => {
+    const { count } = await getAllBlogs([]);
     const pages = Math.ceil(count / POSTS_PER_PAGE);
 
     const pagesToGenerate = [...Array(pages).keys()]
@@ -76,24 +74,22 @@ interface Params extends ParsedUrlQuery {
     page: string;
 }
 
-export const getStaticProps: GetStaticProps<TProps, Params> = ({ params }) => {
+export const getServerSideProps: GetServerSideProps<TProps, Params> = async ({ params }) => {
     const page = params?.page;
     const currentPage = !page || Number.isNaN(+page) ? 1 : +page;
     const skip = (currentPage - 1) * POSTS_PER_PAGE;
-    const { blogs, count } = getAllBlogs(
-        ["title", "slug", "image", "category", "postedAt", "views"],
+    const { blogs, count } = await getAllBlogs(
+        ["title", "slug", "image", "createdDate", "views"],
         skip,
         POSTS_PER_PAGE
     );
 
-    const { blogs: recentPosts } = getAllBlogs(["title"], 0, 5);
-    const tags = getTags();
+    const { blogs: recentPosts } = await getAllBlogs(["title"], 0, 5);
     return {
         props: {
             data: {
                 blogs,
                 recentPosts,
-                tags,
                 currentPage,
                 numberOfPages: Math.ceil(count / POSTS_PER_PAGE),
             },

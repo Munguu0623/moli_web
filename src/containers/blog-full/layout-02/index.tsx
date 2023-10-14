@@ -12,7 +12,6 @@ type TProps = {
     data: {
         blogs: IBlog[];
         recentPosts: IBlog[];
-        tags: BlogMetaType[];
         pagiData?: {
             currentPage: number;
             numberOfPages: number;
@@ -21,7 +20,7 @@ type TProps = {
     };
 };
 
-const BlogArea = ({ data: { blogs, recentPosts, tags, pagiData } }: TProps) => {
+const BlogArea = ({ data: { blogs, recentPosts,  pagiData } }: TProps) => {
     return (
         <Section className="blog-area" space="bottom">
             <h2 className="tw-sr-only">Blog Section</h2>
@@ -35,7 +34,7 @@ const BlogArea = ({ data: { blogs, recentPosts, tags, pagiData } }: TProps) => {
                                     title={blog.title}
                                     path={blog.path}
                                     image={blog.image}
-                                    postedAt={blog.postedAt}
+                                    postedAt={blog.createdDate}
                                     views={blog.views}
                                     initial="offscreen"
                                     whileInView="onscreen"
@@ -55,7 +54,7 @@ const BlogArea = ({ data: { blogs, recentPosts, tags, pagiData } }: TProps) => {
                     )}
                 </div>
                 <aside className="tw-col-span-full lg:tw-col-[3/-1]">
-                    <BlogSidebar recentPosts={recentPosts} tags={tags} />
+                    <BlogSidebar recentPosts={recentPosts} />
                 </aside>
             </div>
         </Section>

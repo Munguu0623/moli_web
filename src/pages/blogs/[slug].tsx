@@ -13,7 +13,6 @@ import {
     getPostBySlug,
     getAllBlogs,
     getPrevNextPost,
-    getTags,
 } from "../../lib/blog";
 
 type TProps = {
@@ -36,6 +35,7 @@ type PageProps = NextPage<TProps> & {
 const BlogDetails: PageProps = ({
     data: { blog, prevAndNextPost, recentPosts, tags },
 }) => {
+    console.log('blog medee---->', blog)
     return (
         <>
             <SEO
@@ -43,12 +43,12 @@ const BlogDetails: PageProps = ({
                 description="This is a mighty good description of this blog."
                 jsonLdType="article"
                 article={{
-                    publishedTime: blog.postedAt,
-                    modifiedTime: blog.postedAt,
-                    authors: [blog.author.name],
+                    publishedTime: blog.createdDate,
+                    modifiedTime: blog.createdDate,
+                    authors: [blog.authorId.name],
                     tags: tags.map((tag) => tag.title),
                 }}
-                image={`https://maxcoach-react.pages.dev${blog.image.src}`}
+                image={`https://maxcoach-react.pages.dev${blog.image}`}
             />
             <Breadcrumb
                 pages={[
@@ -64,12 +64,12 @@ const BlogDetails: PageProps = ({
             <div className="tw-container tw-pb-15 md:tw-pb-20 lg:tw-pb-[100px] tw-grid tw-grid-cols-3 tw-gap-7.5 lg:tw-gap-15">
                 <div className="tw-col-span-full lg:tw-col-[1/3]">
                     <BlogDetailsArea {...blog} />
-                    <BlogAuthor {...blog.author} />
+                    <BlogAuthor {...blog.authorId} />
                     <BlogNavLinks {...prevAndNextPost} />
                     <DisqusComment id={blog.slug} title={blog.title} />
                 </div>
                 <div className="tw-col-span-full lg:tw-col-[3/-1]">
-                    <BlogSidebar recentPosts={recentPosts} tags={tags} />
+                    <BlogSidebar recentPosts={recentPosts} />
                 </div>
             </div>
         </>
@@ -78,8 +78,8 @@ const BlogDetails: PageProps = ({
 
 BlogDetails.Layout = Layout01;
 
-export const getStaticPaths: GetStaticPaths = () => {
-    const { blogs } = getAllBlogs(["slug"]);
+export const getStaticPaths: GetStaticPaths = async () => {
+    const { blogs } = await getAllBlogs(["slug"]);
     return {
         paths: blogs.map(({ slug }) => {
             return {
@@ -98,15 +98,14 @@ type Params = {
     };
 };
 
-export const getStaticProps = ({ params }: Params) => {
+export const getStaticProps = async({ params }: Params) => {
     const blog = getPostBySlug(params.slug, "all");
     const prevAndNextPost = getPrevNextPost(params.slug, [
         "title",
         "image",
         "slug",
     ]);
-    const { blogs: recentPosts } = getAllBlogs(["title"], 0, 5);
-    const tags = getTags();
+    const { blogs: recentPosts } = await getAllBlogs(["title"], 0, 5);
 
     return {
         props: {
@@ -114,7 +113,6 @@ export const getStaticProps = ({ params }: Params) => {
                 blog,
                 prevAndNextPost,
                 recentPosts,
-                tags,
             },
             layout: {
                 headerShadow: true,

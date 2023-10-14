@@ -1,4 +1,4 @@
-export type IDType = string | number;
+export type IDType = string | number | null;
 
 export interface ImageType {
     src: string;
@@ -180,14 +180,14 @@ export interface BlogMetaType {
 export interface IBlog {
     title: string;
     slug: string;
-    path: string;
-    postedAt: string;
-    image: ImageType;
-    category: BlogMetaType;
-    tags: BlogMetaType[];
+    path:string;
+    createdDate: string;
+    modifiedDate : string;
+    image: string;
+    // category: BlogMetaType;
     views: number;
-    author: IInstructor;
-    content: string;
+    authorId: IInstructor;
+    content: string | null;
     excerpt: string;
 }
 

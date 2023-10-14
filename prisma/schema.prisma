@@ -3,12 +3,52 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
 
-model Sda {
-  id    Int     @id @default(autoincrement())
-  name  String? @db.VarChar(255)
-  email String  @unique(map: "email") @db.VarChar(255)
+model Blogs {
+  id           Int      @id @default(autoincrement())
+  title        String
+  slug         String
+  content      String?
+  category     Int?
+  type         String?
+  authorId     Int?
+  createdDate  DateTime @default(now())
+  modifiedDate DateTime
+  image        String   @db.VarChar(255)
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Menu {
+  id           String    @id
+  name         String?   @db.NVarChar(100)
+  parentMenuId String?   @db.VarChar(100)
+  menuType     String?   @db.VarChar(100)
+  menuUrl      String?
+  isVisible    Int?
+  createdDate  DateTime?
+  modifiedDate DateTime?
+}
+
+model RoleMenu {
+  id          Int      @id @default(autoincrement())
+  roleId      String   @db.VarChar(100)
+  menuId      String   @db.VarChar(100)
+  createdDate DateTime
+}
+
+model Users {
+  id           Int       @id @default(autoincrement())
+  firstName    String?   @db.NVarChar(100)
+  password     String
+  phoneNumber  String?   @db.NVarChar(100)
+  email        String?   @unique @db.NVarChar(100)
+  createdDate  DateTime
+  modifiedDate DateTime?
 }

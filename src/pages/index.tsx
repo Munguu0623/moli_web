@@ -91,7 +91,7 @@ const Home: PageProps = ({ data }) => {
 
 Home.Layout = Layout;
 
-export const getStaticProps: GetStaticProps = () => {
+export const getStaticProps: GetStaticProps = async() => {
     const page = getPageData("home", "index-01");
     const courses = getallCourses(
         [
@@ -123,8 +123,8 @@ export const getStaticProps: GetStaticProps = () => {
         "isPopular",
         true
     );
-    const { blogs } = getAllBlogs(
-        ["title", "image", "category", "postedAt", "views"],
+    const { blogs } = await getAllBlogs(
+        ["title", "image", "createdDate", "views"],
         0,
         3
     );
