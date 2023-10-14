@@ -6,7 +6,7 @@ export default [
     },
     {
         id: 2,
-        label: "Pages",
+        label: "Зөвөлгөө",
         path: "#!",
         submenu: [
             {
@@ -68,7 +68,7 @@ export default [
     },
     {
         id: 3,
-        label: "Courses",
+        label: "Эвент",
         path: "#!",
         submenu: [
             {
@@ -105,7 +105,7 @@ export default [
     },
     {
         id: 4,
-        label: "Event",
+        label: "Мэргэжил",
         path: "#!",
         submenu: [
             {
@@ -125,9 +125,9 @@ export default [
         label: "Blog",
         path: "/blogs/blog-grid-sidebar",
     },
-    {
-        id: 6,
-        label: "Contact Us",
-        path: "/contact-us",
-    },
+    // {
+    //     id: 6,
+    //     label: "Contact Us",
+    //     path: "/contact-us",
+    // },
 ];

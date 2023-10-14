@@ -44,12 +44,13 @@ const HeroArea = ({
                     <div className="tw-absolute tw-inset-0 -tw-z-10">
                         <img
                             src={images[0].src}
-                            alt={images[0]?.alt || "bg"}
+                            alt={images[0]?.alt || "zurag"}
                             loading="eager"
                             className="tw-w-full tw-h-full tw-object-cover"
                         />
                     </div>
                 )}
+
                 <motion.div
                     className="tw-container tw-text-center"
                     initial="offscreen"
@@ -59,7 +60,10 @@ const HeroArea = ({
                 >
                     {headings?.[0]?.content && (
                         <h1 className="tw-text-[46px] lg:tw-text-[56px] tw-leading-tight tw-font-medium tw-text-white">
-                            <div> {headings[0].content} </div>
+                            <div className="">
+                                {" "}
+                                {headings[0].content}{" "}
+                            </div>
                             <span className="tw-text-primary tw-inline-block">
                                 <Typewriter words={words} loop cursor />
                             </span>
