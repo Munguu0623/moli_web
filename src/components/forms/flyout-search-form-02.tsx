@@ -70,7 +70,7 @@ const FlyoutSearchForm = ({ show, onClose, className }: TProps) => {
                         <form action="#" onSubmit={onSubmit}>
                             <input
                                 type="text"
-                                placeholder="Search..."
+                                placeholder="хайх..."
                                 className="tw-text-[50px] tw-font-light tw-h-[100px] tw-w-full tw-py-3.8 tw-text-heading tw-border-b-[3px] tw-border-b-primary tw-bg-transparent focus:tw-outline-0"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}

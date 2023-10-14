@@ -1,104 +1,12 @@
 export default [
     {
         id: 1,
-        label: "Home",
-        path: "#!",
-        megamenu: [
-            {
-                id: 11,
-                title: "Group 01",
-                submenu: [
-                    {
-                        id: 111,
-                        label: "MaxCoach Education",
-                        path: "/",
-                        status: "hot",
-                    },
-                    {
-                        id: 112,
-                        label: "Course Portal",
-                        path: "/index-02",
-                    },
-                    {
-                        id: 113,
-                        label: "Distant Learning",
-                        path: "/index-03",
-                        status: "hot",
-                    },
-                    {
-                        id: 114,
-                        label: "Multimedia Pedagogy",
-                        path: "/index-04",
-                    },
-                    {
-                        id: 115,
-                        label: "Modern Schooling",
-                        path: "/index-05",
-                    },
-                    {
-                        id: 116,
-                        label: "Remote Training",
-                        path: "/index-06",
-                    },
-                ],
-            },
-            {
-                id: 12,
-                title: "Group 02",
-                submenu: [
-                    {
-                        id: 121,
-                        label: "Health Coaching",
-                        path: "/",
-                        status: "coming soon",
-                    },
-                    {
-                        id: 122,
-                        label: "Gym Coaching",
-                        path: "/",
-                        status: "coming soon",
-                    },
-                    {
-                        id: 123,
-                        label: "Business",
-                        path: "/",
-                        status: "coming soon",
-                    },
-                    {
-                        id: 124,
-                        label: "Artist",
-                        path: "/",
-                        status: "coming soon",
-                    },
-                    {
-                        id: 125,
-                        label: "Kitchen Coach",
-                        path: "/",
-                        status: "coming soon",
-                    },
-                    {
-                        id: 126,
-                        label: "Motivation",
-                        path: "/",
-                        status: "coming soon",
-                    },
-                ],
-            },
-            {
-                id: 13,
-                title: "Banner",
-                banner: {
-                    path: "/",
-                    image: {
-                        src: "/images/menu/mega-menu.jpg",
-                    },
-                },
-            },
-        ],
+        label: "Нүүр",
+        path: "/",
     },
     {
         id: 2,
-        label: "Pages",
+        label: "Зөвөлгөө",
         path: "#!",
         submenu: [
             {
@@ -160,7 +68,7 @@ export default [
     },
     {
         id: 3,
-        label: "Courses",
+        label: "Эвент",
         path: "#!",
         submenu: [
             {
@@ -197,7 +105,7 @@ export default [
     },
     {
         id: 4,
-        label: "Event",
+        label: "Мэргэжил",
         path: "#!",
         submenu: [
             {
@@ -214,7 +122,7 @@ export default [
     },
     {
         id: 5,
-        label: "Blog",
+        label: "Влог",
         path: "#!",
         submenu: [
             {
@@ -239,9 +147,9 @@ export default [
             },
         ],
     },
-    {
-        id: 6,
-        label: "Contact Us",
-        path: "/contact-us",
-    },
+    // {
+    //     id: 6,
+    //     label: "Contact Us",
+    //     path: "/contact-us",
+    // },
 ];
