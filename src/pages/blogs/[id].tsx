@@ -50,10 +50,10 @@ const BlogDetails: PageProps = ({ data: { blog, category, recentPosts } }) => {
             /> */}
             <Breadcrumb
                 pages={[
-                    { path: "/", label: "home" },
+                    { path: "/", label: "Нүүр" },
                     {
                         path: "/blogs/blog-grid-sidebar",
-                        label: "blogs",
+                        label: "Нийтлэлүүд",
                     },
                 ]}
                 currentPage={blog.title}

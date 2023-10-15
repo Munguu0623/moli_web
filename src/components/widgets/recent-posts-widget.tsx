@@ -8,7 +8,7 @@ type TProps = {
 const RecentPostsWidget = ({ recentPosts }: TProps) => {
     return (
         <div className="tw-mt-[45px]">
-            <h3 className="tw-mb-[9px]">Recent Posts</h3>
+            <h3 className="tw-mb-[9px]">Сүүлийн нийтлэлүүд</h3>
 
             {recentPosts.map(({ title, path }) => (
                 <Anchor
