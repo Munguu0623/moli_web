@@ -12,7 +12,7 @@ type TProps = {
     data: {
         blogs: IBlog[];
         recentPosts: IBlog[];
-        category: BlogMetaType[];
+        category?: BlogMetaType[];
         pagiData?: {
             currentPage: number;
             numberOfPages: number;
@@ -24,6 +24,7 @@ type TProps = {
 const BlogArea = ({
     data: { blogs, recentPosts, category, pagiData },
 }: TProps) => {
+    console.log("pagiData---", pagiData);
     return (
         <Section className="blog-area" space="bottom">
             <h2 className="tw-sr-only">Blog Section</h2>

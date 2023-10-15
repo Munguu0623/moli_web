@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps = async () => {
     const { blogs, count } = await getAllBlogs(0, POSTS_PER_PAGE);
     const { blogs: recentPosts } = await getAllBlogs(0, 5);
     const { category } = await getAllCategories();
-
+    console.log("count---", count);
     return {
         props: {
             data: {
