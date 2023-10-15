@@ -3,9 +3,9 @@ import Anchor from "@ui/anchor";
 import AuthorMeta from "@components/blog-meta/author";
 import BlogMetaItem from "@components/blog-meta/meta-item";
 import SocialShare from "@components/social-share/layout-03";
-import TagMeta from "@components/blog-meta/tags";
+
 import MarkdownRenderer from "@components/markdown-renderer";
-import { IBlog, IAuthor } from "@utils/types";
+import { IBlog } from "@utils/types";
 
 const BlogDetails = ({
     image,
