@@ -64,7 +64,7 @@ const BlogDetails: PageProps = ({ data: { blog, category, recentPosts } }) => {
                     <BlogDetailsArea {...blog} />
                     <BlogAuthor {...blog.author} />
                     {/* <BlogNavLinks {...prevAndNextPost} /> */}
-                    <DisqusComment id={blog.slug} title={blog.title} />
+                    {/* <DisqusComment id={blog.slug} title={blog.title} /> */}
                 </div>
                 <div className="tw-col-span-full lg:tw-col-[3/-1]">
                     <BlogSidebar

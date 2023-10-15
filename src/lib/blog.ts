@@ -1,10 +1,7 @@
 
-import dayjs from "dayjs";
-import { IBlog, BlogMetaType, IDType } from "@utils/types";
-import { slugify, flatDeep } from "@utils/methods";
-import { getSlugs } from "./util";
-import { getAuthorByID } from "./author";
-import { Blogs, Prisma, PrismaClient } from "@prisma/client";
+import { IBlog, IDType } from "@utils/types";
+
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 type BlogsWhereUniqueInput = Prisma.BlogsWhereUniqueInput & {
@@ -32,7 +29,6 @@ export async function getBlogById(id: number): Promise<IBlog> {
     });
 
     if (!blogData) {
-        // Handle case where the blog post is not found
         throw new Error(`Blog post with id ${id} not found.`);
     }
 
@@ -90,17 +86,12 @@ export async function getPostsByAuthor(
     skip = 0,
     limit?: number
 ) {
-    // const postFields =
-    //     fields === "all"
-    //         ? "all"
-    //         : ([...fields, "author"] as Array<keyof IBlog>);
     let blogs = await prisma.blogs.findMany({
         where: {
             authorId: authorID
         }
     });
-    // let result = blogs.filter((post) => post.authorId === authorID);
-    // const totalPosts = result.length;
+
     if (limit) blogs = blogs.slice(skip, skip + limit);
     return { posts: blogs, count: blogs.length };
 }
@@ -166,6 +157,6 @@ export async function searchBlogs(
 }
 export async function getAllCategories() {
     let category = await prisma.category.findMany();
-    console.log(category, "category---");
+
     return { category };
 }

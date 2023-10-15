@@ -55,7 +55,6 @@ export const getStaticProps: GetStaticProps = async () => {
     const { blogs: recentPosts } = await getAllBlogs(0, 5);
     const { category } = await getAllCategories();
 
-    // const tags = getTags();
     return {
         props: {
             data: {
