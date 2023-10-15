@@ -72,7 +72,7 @@ const BlogSearch: PageProps = ({ data }) => {
 BlogSearch.Layout = Layout01;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { blogs } = searchBlogs(context.query.s as string);
+    const { blogs } = await searchBlogs(context.query.s as string);
 
     return {
         props: {

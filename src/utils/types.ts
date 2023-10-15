@@ -186,20 +186,11 @@ export interface IBlog {
     image: string;
     category: BlogMetaType;
     views: number;
-    authorId: IAuthor;
+    author: IAuthor;
     content: string | null;
     excerpt: string;
 }
-export interface IAuthor {
-    id: number;
-    firstName: string | null | undefined;
-    password: string
-    phoneNumber: string
-    email: string
-    createdDate: string
-    modifiedDate: string
 
-}
 export interface ISocial {
     label: string;
     icon: string;
@@ -216,6 +207,16 @@ export interface IInstructor {
     designation: string;
     bio: string;
     socials: ISocial[];
+}
+export interface IAuthor {
+    id: number;
+    firstName: string | null | undefined;
+    password: string | undefined
+    phoneNumber: string | null | undefined
+    email: string | null | undefined
+    createdDate: string | undefined
+    modifiedDate: string | undefined
+
 }
 
 export type FieldType<T> = Array<keyof T> | "all";

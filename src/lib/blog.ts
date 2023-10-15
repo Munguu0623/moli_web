@@ -1,6 +1,4 @@
-import fs from "fs";
-import { join } from "path";
-import matter from "gray-matter";
+
 import dayjs from "dayjs";
 import { IBlog, BlogMetaType, IDType } from "@utils/types";
 import { slugify, flatDeep } from "@utils/methods";
@@ -33,18 +31,13 @@ export async function getBlogById(
     id: number,
 
 ): Promise<IBlog> {
-    // const realSlug = slug.replace(/\.md$/, "");
-    // const fullPath = join(postsDirectory, `${realSlug}.md`);
-    // const fileContents = JSON.parse(
-    //     JSON.stringify(fs.readFileSync(fullPath, "utf8"))
-    // ) as BlogType;
-    // const { data, content } = matter(fileContents);
 
     const blogData = await prisma.blogs.findUnique(
         {
             where: { id } as BlogsWhereUniqueInput,
             include: {
                 Category: true,
+                Users: true
             }
         }
     )
@@ -53,57 +46,6 @@ export async function getBlogById(
         // Handle case where the blog post is not found
         throw new Error(`Blog post with slug ${id} not found.`);
     }
-
-    // let blog: IBlog;
-
-    // if (fields === "all") {
-    // blog = {
-    //     ...blogData,
-    // category: {
-    //     title: blogData.category,
-    //     slug: slugify(blogData.category),
-    //     path: `/blogs/category/${slugify(blogData.category)}`,
-    // },
-    //     views:2,
-    //     path:"/",
-    //     createdDate:blogData.createdDate.toString(),
-    //     modifiedDate:blogData.modifiedDate.toString(),
-    //     excerpt: makeExcerpt(blogData?.content, 150),
-    //     authorId: getAuthorByID(blogData.authorId, "all"),
-    // };
-    // } else {
-    //     blog = fields.reduce((acc: IBlog, field: keyof IBlog) => {
-    //         console.log(acc)
-    //         if (field === "slug") {
-    //             return { ...acc, slug: slug };
-    //         }
-    //         if (field === "content") {
-    //             return { ...acc, [field]: blogData.content };
-    //         }
-    //         if (field === "excerpt") {
-    //             return { ...acc, excerpt: makeExcerpt(blogData.content, 150) };
-    //         }
-    //         if (field === "authorId") {
-    //             const author = getAuthorByID(blogData.authorId, "all");
-    //             return { ...acc, author };
-    //         }
-    //         if (field === "category") {
-    //             return {
-    //                 ...acc,
-    //                 category: {
-    //                     title: blogData.category,
-    //                     slug: slugify(blogData.category),
-    //                     path: `/blogs/category/${slugify(blogData.category)}`,
-    //                 },
-    //             };
-    //         }
-    //         // if (typeof data[field] !== "undefined") {
-    //         //     return { ...acc, [field]: blogData[field] };
-    //         // }
-    //         return acc;
-    //     }, <IBlog>{});
-    // }
-
     return {
         ...blogData,
         createdDate: blogData.createdDate.toString(),
@@ -112,6 +54,15 @@ export async function getBlogById(
             id: blogData.Category?.id,
             name: blogData.Category?.name,
             path: `/blogs/category/${blogData.Category?.name}`
+        },
+        author: {
+            id: blogData.authorId,
+            firstName: blogData.Users?.firstName,
+            password: blogData.Users?.password,
+            phoneNumber: blogData.Users?.phoneNumber,
+            email: blogData.Users?.email,
+            createdDate: blogData.Users?.createdDate.toString(),
+            modifiedDate: blogData.Users?.modifiedDate?.toString(),
         },
         views: 2,
         excerpt: makeExcerpt(blogData?.content, 150),
@@ -124,15 +75,16 @@ export async function getAllBlogs(
     limit?: number
 ) {
     const blog = await prisma.blogs.findMany({
+        select: {
+            id: true
+        },
         orderBy: {
             createdDate: "desc",
-        },
-        include: {
-            Category: true,
         },
         skip,
         take: limit,
     })
+    console.log('blogs with user---->', blog)
 
     const blogtest = await Promise.all(
         blog.map((blog) => getBlogById(blog.id))
@@ -140,62 +92,6 @@ export async function getAllBlogs(
     let blogs = JSON.parse(JSON.stringify(blogtest))
     return { blogs, count: blogs.length };
 }
-
-// export async function getPrevNextPost(
-//     currentSlug: string,
-// ) {
-//     const { blogs } = await getAllBlogs();
-//     const currentIndex = blogs.findIndex((post) => post.slug === currentSlug);
-//     const prevPost = blogs[currentIndex - 1] || null;
-//     const nextPost = blogs[currentIndex + 1] || null;
-//     return { prevPost, nextPost };
-// }
-
-// export async function getTags() {
-//     const { blogs } = await getAllBlogs(["tags"]);
-//     const tags = flatDeep<BlogMetaType>(blogs.map((post) => post.tags));
-//     const result: BlogMetaType[] = [];
-
-//     tags.forEach((tag) => {
-//         if (!result.find((t) => t.title === tag.title)) {
-//             result.push(tag);
-//         }
-//     });
-
-//     return result;
-// }
-
-// export async function getPostsByCategory(
-//     category: string,
-//     fields: Array<keyof IBlog> | "all" = [],
-//     skip = 0,
-//     limit?: number
-// ) {
-//     const postFields =
-//         fields === "all"
-//             ? "all"
-//             : ([...fields, "category"] as Array<keyof IBlog>);
-//     const { blogs} = await getAllBlogs(postFields);
-//     let result = blogs.filter((post) => post.category.slug === category);
-//     const totalPosts = result.length;
-//     if (limit) result = result.slice(skip, skip + limit);
-//     return { posts: result, count: totalPosts };
-// }
-
-// export async function getPostsByTag(
-//     tag: string,
-//     fields: Array<keyof IBlog> | "all" = [],
-//     skip = 0,
-//     limit?: number
-// ) {
-//     const postFields =
-//         fields === "all" ? "all" : ([...fields, "tags"] as Array<keyof IBlog>);
-//     const { blogstest} = await getAllBlogs(postFields);
-//     let result = blogs.filter((post) => post.tags.some((t) => t.slug === tag));
-//     const totalPosts = result.length;
-//     if (limit) result = result.slice(skip, skip + limit);
-//     return { posts: result, count: totalPosts };
-// }
 
 export async function getPostsByAuthor(
     authorID: IDType,
@@ -220,12 +116,15 @@ export async function getPostsByAuthor(
 
 export async function searchBlogs(
     value: string
-): Promise<IBlog> {
+) {
     // const postFields =
     //     fields === "all"
     //         ? "all"
     //         : ([...fields, "author"] as Array<keyof IBlog>);
     let blogs = await prisma.blogs.findMany({
+        select: {
+            id: true, Category: true
+        },
         where: {
             OR: [{
                 content: {
@@ -238,17 +137,17 @@ export async function searchBlogs(
                 }
             }, {
                 Category: {
-                    name: { // Replace 'categoryName' with actual field name
+                    name: {
                         contains: value
                     }
                 }
             }]
         },
-        include: {
-            Category: true,
-        },
     });
-    // let result = blogs.filter((post) => post.authorId === authorID);
-    // const totalPosts = result.length;
-    return { blogs };
+    let blogtest: IBlog[]
+    blogtest = await Promise.all(
+        blogs.map((blog) => getBlogById(blog.id))
+    );
+    // const blog = JSON.parse(JSON.stringify(blogtest))
+    return { blogs: blogtest };
 }
