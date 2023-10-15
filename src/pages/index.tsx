@@ -124,7 +124,6 @@ export const getStaticProps: GetStaticProps = async() => {
         true
     );
     const { blogs } = await getAllBlogs(
-        ["title", "image", "createdDate", "views"],
         0,
         3
     );

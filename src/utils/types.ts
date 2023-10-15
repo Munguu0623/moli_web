@@ -86,20 +86,20 @@ export interface IContent {
     id: IDType;
     text: string;
     type:
-        | "text"
-        | "heading"
-        | "iframe"
-        | "h3"
-        | "h4"
-        | "h5"
-        | "list"
-        | "order-list"
-        | "blockquote";
+    | "text"
+    | "heading"
+    | "iframe"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "list"
+    | "order-list"
+    | "blockquote";
     content:
-        | string
-        | { src: string; alt?: string }
-        | string[]
-        | ListContentType[];
+    | string
+    | { src: string; alt?: string }
+    | string[]
+    | ListContentType[];
 }
 
 export interface ReviewType {
@@ -172,20 +172,21 @@ export interface ICourse {
 }
 
 export interface BlogMetaType {
-    id:number ;
-    name:string ;
+    id: number | undefined;
+    name: string | undefined;
+    path: string;
 }
 
 export interface IBlog {
     title: string;
     slug: string;
-    path:string;
+    path: string;
     createdDate: string;
-    modifiedDate : string;
+    modifiedDate: string;
     image: string;
-    category: string | undefined;
+    category: BlogMetaType;
     views: number;
-    authorId: IInstructor;
+    authorId: number;
     content: string | null;
     excerpt: string;
 }
@@ -197,7 +198,7 @@ export interface ISocial {
 }
 
 export interface IInstructor {
-    id: IDType;
+    id: number;
     name: string;
     slug: string;
     path: string;
@@ -293,15 +294,15 @@ export type TMenu = TSubMenu & {
 
 export type TSection = {
     space?:
-        | "top-bottom"
-        | "top-bottom-2"
-        | "top-bottom-3"
-        | "top"
-        | "top-2"
-        | "bottom"
-        | "bottom-2"
-        | "bottom-3"
-        | "none";
+    | "top-bottom"
+    | "top-bottom-2"
+    | "top-bottom-3"
+    | "top"
+    | "top-2"
+    | "bottom"
+    | "bottom-2"
+    | "bottom-3"
+    | "none";
     bg?: string;
     titleSize?: "default" | "large";
     className?: string;

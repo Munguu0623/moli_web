@@ -20,7 +20,7 @@ type TProps = {
     };
 };
 
-const BlogArea = ({ data: { blogs, recentPosts,  pagiData } }: TProps) => {
+const BlogArea = ({ data: { blogs, recentPosts, pagiData } }: TProps) => {
     return (
         <Section className="blog-area" space="bottom">
             <h2 className="tw-sr-only">Blog Section</h2>
@@ -34,7 +34,7 @@ const BlogArea = ({ data: { blogs, recentPosts,  pagiData } }: TProps) => {
                                     title={blog.title}
                                     path={blog.path}
                                     image={blog.image}
-                                    postedAt={blog.createdDate}
+                                    createdDate={blog.createdDate}
                                     views={blog.views}
                                     initial="offscreen"
                                     whileInView="onscreen"

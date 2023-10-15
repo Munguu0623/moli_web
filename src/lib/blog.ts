@@ -6,12 +6,12 @@ import { IBlog, BlogMetaType, IDType } from "@utils/types";
 import { slugify, flatDeep } from "@utils/methods";
 import { getSlugs } from "./util";
 import { getAuthorByID } from "./author";
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Blogs, Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 type BlogsWhereUniqueInput = Prisma.BlogsWhereUniqueInput & {
     id: number;
-  };
+};
 // interface BlogType extends Omit<IBlog, "category" | "tags" | "author"> {
 //     category: string;
 //     tags: string[];
@@ -20,7 +20,7 @@ type BlogsWhereUniqueInput = Prisma.BlogsWhereUniqueInput & {
 // const postsDirectory = join(process.cwd(), "src/data/blogs");
 
 const makeExcerpt = (str: string | null | undefined, maxLength: number): string => {
-    if(!str) return ""
+    if (!str) return ""
     if (str.length <= maxLength) {
         return str;
     }
@@ -31,7 +31,7 @@ const makeExcerpt = (str: string | null | undefined, maxLength: number): string 
 
 export async function getBlogById(
     id: number,
-    
+
 ): Promise<IBlog> {
     // const realSlug = slug.replace(/\.md$/, "");
     // const fullPath = join(postsDirectory, `${realSlug}.md`);
@@ -39,11 +39,12 @@ export async function getBlogById(
     //     JSON.stringify(fs.readFileSync(fullPath, "utf8"))
     // ) as BlogType;
     // const { data, content } = matter(fileContents);
+
     const blogData = await prisma.blogs.findUnique(
         {
-            where: {id} as BlogsWhereUniqueInput,
-            include:{
-                Category:true,
+            where: { id } as BlogsWhereUniqueInput,
+            include: {
+                Category: true,
             }
         }
     )
@@ -56,20 +57,20 @@ export async function getBlogById(
     // let blog: IBlog;
 
     // if (fields === "all") {
-        // blog = {
-        //     ...blogData,
-            // category: {
-            //     title: blogData.category,
-            //     slug: slugify(blogData.category),
-            //     path: `/blogs/category/${slugify(blogData.category)}`,
-            // },
-        //     views:2,
-        //     path:"/",
-        //     createdDate:blogData.createdDate.toString(),
-        //     modifiedDate:blogData.modifiedDate.toString(),
-        //     excerpt: makeExcerpt(blogData?.content, 150),
-        //     authorId: getAuthorByID(blogData.authorId, "all"),
-        // };
+    // blog = {
+    //     ...blogData,
+    // category: {
+    //     title: blogData.category,
+    //     slug: slugify(blogData.category),
+    //     path: `/blogs/category/${slugify(blogData.category)}`,
+    // },
+    //     views:2,
+    //     path:"/",
+    //     createdDate:blogData.createdDate.toString(),
+    //     modifiedDate:blogData.modifiedDate.toString(),
+    //     excerpt: makeExcerpt(blogData?.content, 150),
+    //     authorId: getAuthorByID(blogData.authorId, "all"),
+    // };
     // } else {
     //     blog = fields.reduce((acc: IBlog, field: keyof IBlog) => {
     //         console.log(acc)
@@ -105,26 +106,34 @@ export async function getBlogById(
 
     return {
         ...blogData,
-        createdDate:blogData.createdDate.toString(),
-        modifiedDate:blogData.modifiedDate.toString(),
-        category:blogData.Category?.name,
-        views:2,
+        createdDate: blogData.createdDate.toString(),
+        modifiedDate: blogData.modifiedDate.toString(),
+        category: {
+            id: blogData.Category?.id,
+            name: blogData.Category?.name,
+            path: `/blogs/category/${blogData.Category?.name}`
+        },
+        views: 2,
         excerpt: makeExcerpt(blogData?.content, 150),
         path: `/blogs/${blogData.slug}`,
-    } ;
+    };
 }
 
 export async function getAllBlogs(
     skip = 0,
     limit?: number
 ) {
-    const blogs = await prisma.blogs.findMany({
+    const blog = await prisma.blogs.findMany({
         orderBy: {
             createdDate: "desc",
-          },
-          skip,
-          take:limit,
+        },
+        include: {
+            Category: true,
+        },
+        skip,
+        take: limit,
     })
+    // let blogs  IBlog
     // const slugs = getSlugs(postsDirectory);
     // let blogs = slugs
     //     .map((slug) => getPostBySlug(slug, fields))
@@ -135,21 +144,25 @@ export async function getAllBlogs(
     //             : 1
     //     );
     // if (limit) blogs = blogs.slice(skip, skip + limit);
-    // const blogs = await Promise.all(
-    //     blogData.map((blog) => getPostById(blog.id))
-    //   );
+    // let blogs = await Promise.all(
+    // blog.map((blog) => getBlogById(blog.id))
+    // );
+    const blogtest = await Promise.all(
+        blog.map((blog) => getBlogById(blog.id))
+    );
+    let blogs = JSON.parse(JSON.stringify(blogtest))
     return { blogs, count: blogs.length };
 }
 
-export async function getPrevNextPost(
-    currentSlug: string,
-) {
-    const { blogs } = await getAllBlogs();
-    const currentIndex = blogs.findIndex((post) => post.slug === currentSlug);
-    const prevPost = blogs[currentIndex - 1] || null;
-    const nextPost = blogs[currentIndex + 1] || null;
-    return { prevPost, nextPost };
-}
+// export async function getPrevNextPost(
+//     currentSlug: string,
+// ) {
+//     const { blogs } = await getAllBlogs();
+//     const currentIndex = blogs.findIndex((post) => post.slug === currentSlug);
+//     const prevPost = blogs[currentIndex - 1] || null;
+//     const nextPost = blogs[currentIndex + 1] || null;
+//     return { prevPost, nextPost };
+// }
 
 // export async function getTags() {
 //     const { blogs } = await getAllBlogs(["tags"]);
@@ -206,9 +219,9 @@ export async function getPostsByAuthor(
     //     fields === "all"
     //         ? "all"
     //         : ([...fields, "author"] as Array<keyof IBlog>);
-    let  blogs  = await prisma.blogs.findMany({
-        where:{
-            authorId:authorID
+    let blogs = await prisma.blogs.findMany({
+        where: {
+            authorId: authorID
         }
     });
     // let result = blogs.filter((post) => post.authorId === authorID);

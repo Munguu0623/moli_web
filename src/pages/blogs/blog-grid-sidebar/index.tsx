@@ -49,20 +49,15 @@ const BlogGridSidebar: PageProps = ({
 BlogGridSidebar.Layout = Layout01;
 
 export const getStaticProps: GetStaticProps = async () => {
-    const { blogs, count } = await getAllBlogs(
-        ["title", "image", "createdDate", "views"],
-        0,
-        POSTS_PER_PAGE
-    );
-console.log('blogs--', blogs)
-    const { blogs: recentPosts } = await getAllBlogs(["title"], 0, 5);
+    const { blogs, count } = await getAllBlogs(0, POSTS_PER_PAGE);
+    console.log("blogs--", blogs);
+    const { blogs: recentPosts } = await getAllBlogs(0, 5);
     // const tags = getTags();
     return {
         props: {
             data: {
                 blogs,
                 recentPosts,
-                // tags,
                 currentPage: 1,
                 numberOfPages: Math.ceil(count / POSTS_PER_PAGE),
             },
