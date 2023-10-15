@@ -79,9 +79,17 @@ BlogDetails.Layout = Layout01;
 export const getServerSideProps: GetServerSideProps = async (
     context: GetServerSidePropsContext
 ) => {
-    console.log(context, "context");
-    const params = context.params.id as { id: string };
-    const blog = getBlogById(params.id);
+    const { id } = context.params ?? {};
+
+    if (typeof id !== "string") {
+        // Handle the case where id is not a string (or not provided)
+        return {
+            notFound: true,
+        };
+    }
+
+    const blog = await getBlogById(Number(id));
+    console.log(blog, "----blog");
     //  const prevAndNextPost = getPrevNextPost(params.slug, [
     //     "title",
     //     "image",
@@ -92,7 +100,7 @@ export const getServerSideProps: GetServerSideProps = async (
     return {
         props: {
             data: {
-                blog,
+                blog: JSON.parse(JSON.stringify(blog)),
                 recentPosts,
             },
             layout: {
