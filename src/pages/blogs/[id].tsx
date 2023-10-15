@@ -14,13 +14,14 @@ import DisqusComment from "@components/disqus-comment";
 import BlogSidebar from "@containers/blog-details/blog-sidebar";
 import { BlogMetaType, IAuthor, IBlog, IInstructor } from "@utils/types";
 import { toCapitalize } from "@utils/methods";
-import { getBlogById, getAllBlogs } from "../../lib/blog";
+import { getBlogById, getAllBlogs, getAllCategories } from "../../lib/blog";
 import { PrismaClient } from "@prisma/client";
 
 type TProps = {
     data: {
         blog: IBlog;
         author: IAuthor;
+        category: BlogMetaType[];
         // prevAndNextPost: {
         //     prevPost: IBlog;
         //     nextPost: IBlog;
@@ -33,7 +34,7 @@ type PageProps = NextPage<TProps> & {
     Layout: typeof Layout01;
 };
 
-const BlogDetails: PageProps = ({ data: { blog, recentPosts } }) => {
+const BlogDetails: PageProps = ({ data: { blog, category, recentPosts } }) => {
     return (
         <>
             {/* <SEO
@@ -66,7 +67,10 @@ const BlogDetails: PageProps = ({ data: { blog, recentPosts } }) => {
                     <DisqusComment id={blog.slug} title={blog.title} />
                 </div>
                 <div className="tw-col-span-full lg:tw-col-[3/-1]">
-                    <BlogSidebar recentPosts={recentPosts} />
+                    <BlogSidebar
+                        category={category}
+                        recentPosts={recentPosts}
+                    />
                 </div>
             </div>
         </>
@@ -86,13 +90,9 @@ export const getServerSideProps: GetServerSideProps = async (
             notFound: true,
         };
     }
+    const { category } = await getAllCategories();
 
     const blog = await getBlogById(Number(id));
-    //  const prevAndNextPost = getPrevNextPost(params.slug, [
-    //     "title",
-    //     "image",
-    //     "slug",
-    // ]);
     const { blogs: recentPosts } = await getAllBlogs(0, 5);
 
     return {
@@ -100,6 +100,7 @@ export const getServerSideProps: GetServerSideProps = async (
             data: {
                 blog: JSON.parse(JSON.stringify(blog)),
                 recentPosts,
+                category,
             },
             layout: {
                 headerShadow: true,
