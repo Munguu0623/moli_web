@@ -29,8 +29,8 @@ const BlogGridSidebar: PageProps = ({
         <>
             <SEO title="Blog Grid Sidebar" />
             <Breadcrumb
-                pages={[{ path: "/", label: "home" }]}
-                currentPage="Blog Grid Sidebar"
+                pages={[{ path: "/", label: "Нүүр" }]}
+                currentPage="Нийтлэлүүд"
             />
             <BlogArea
                 data={{

@@ -49,11 +49,11 @@ const BlogCategoryPage: PageProps = ({
             <SEO title={toCapitalize(pageTitle)} />
             <Breadcrumb
                 pages={[
-                    { path: "/", label: "home" },
-                    { path: "/blogs/blog-grid-sidebar", label: "blog" },
+                    { path: "/", label: "Нүүр" },
+                    { path: "/blogs/blog-grid-sidebar", label: "Мэргэжлүүд" },
                 ]}
                 currentPage={pageTitle}
-                title={`Category: ${pageTitle}`}
+                title={`Ангилал: ${pageTitle}`}
             />
             <BlogArea
                 data={{

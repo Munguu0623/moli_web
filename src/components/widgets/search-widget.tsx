@@ -25,7 +25,7 @@ const SearchWidget = ({ className }: TProps) => {
     };
     return (
         <div className={className}>
-            <h3 className="tw-mb-7.5">Search</h3>
+            <h3 className="tw-mb-7.5">Хайх</h3>
             <form className="tw-relative" onSubmit={onSubmit}>
                 <label htmlFor="widgetSearch" className="tw-sr-only">
                     Search For
@@ -36,7 +36,7 @@ const SearchWidget = ({ className }: TProps) => {
                     type="text"
                     className="tw-pr-[72px]"
                     value={search}
-                    placeholder="Search for blogs"
+                    placeholder="мэргэжил хайх"
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 <button

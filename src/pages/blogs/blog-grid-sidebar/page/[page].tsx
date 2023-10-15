@@ -92,7 +92,7 @@ export const getServerSideProps: GetServerSideProps<TProps, Params> = async ({
         props: {
             data: {
                 blogs,
-                recentPosts,
+                recentPostsx    
                 currentPage,
                 numberOfPages: Math.ceil(count / POSTS_PER_PAGE),
             },

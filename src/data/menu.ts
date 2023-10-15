@@ -122,7 +122,7 @@ export default [
     },
     {
         id: 5,
-        label: "Blog",
+        label: "Нийтлэл",
         path: "/blogs/blog-grid-sidebar",
     },
     // {
