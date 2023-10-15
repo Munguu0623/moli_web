@@ -39,7 +39,6 @@ const BlogCard = forwardRef<HTMLDivElement, TProps>(
                         {title}
                     </Anchor>
                 </div>
-
                 <div className="info tw-py-[26px] tw-px-5">
                     {category && (
                         <Anchor

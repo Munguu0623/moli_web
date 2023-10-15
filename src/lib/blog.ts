@@ -10,12 +10,7 @@ const prisma = new PrismaClient();
 type BlogsWhereUniqueInput = Prisma.BlogsWhereUniqueInput & {
     id: number;
 };
-// interface BlogType extends Omit<IBlog, "category" | "tags" | "author"> {
-//     category: string;
-//     tags: string[];
-//     author: IDType;
-// }
-// const postsDirectory = join(process.cwd(), "src/data/blogs");
+
 
 const makeExcerpt = (str: string | null | undefined, maxLength: number): string => {
     if (!str) return ""
@@ -114,13 +109,34 @@ export async function getPostsByAuthor(
 }
 
 
+export async function getBlogByCategory(
+    value: string
+) {
+    let blogs = await prisma.blogs.findMany({
+        select: {
+            id: true, Category: true
+        },
+        where: {
+
+            Category: {
+                name: value
+            }
+
+        },
+    });
+    let blogtest: IBlog[]
+    blogtest = await Promise.all(
+        blogs.map((blog) => getBlogById(blog.id))
+    );
+    const blog = JSON.parse(JSON.stringify(blogtest))
+    return { blogs: blog, count: blogtest.length };
+}
+
+
+
 export async function searchBlogs(
     value: string
 ) {
-    // const postFields =
-    //     fields === "all"
-    //         ? "all"
-    //         : ([...fields, "author"] as Array<keyof IBlog>);
     let blogs = await prisma.blogs.findMany({
         select: {
             id: true, Category: true
@@ -148,6 +164,11 @@ export async function searchBlogs(
     blogtest = await Promise.all(
         blogs.map((blog) => getBlogById(blog.id))
     );
-    // const blog = JSON.parse(JSON.stringify(blogtest))
-    return { blogs: blogtest };
+    const blog = JSON.parse(JSON.stringify(blogtest))
+    return { blogs: blog };
+}
+export async function getAllCategories() {
+    let category = await prisma.category.findMany();
+    console.log(category, "category---");
+    return { category };
 }
