@@ -9,7 +9,6 @@ interface SeoProps extends NextSeoProps {
         publishedTime: string;
         modifiedTime: string;
         authors: string[];
-        tags: string[];
     };
     image?: string;
     instructor?: {

@@ -1,4 +1,9 @@
-import type { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type {
+    GetServerSideProps,
+    GetStaticPaths,
+    GetStaticProps,
+    NextPage,
+} from "next";
 import { ParsedUrlQuery } from "querystring";
 import SEO from "@components/seo/page-seo";
 import Layout01 from "@layout/layout-01";
@@ -23,7 +28,7 @@ type PageProps = NextPage<TProps> & {
 const POSTS_PER_PAGE = 8;
 
 const BlogGridSidebar: PageProps = ({
-    data: { blogs, recentPosts,  currentPage, numberOfPages },
+    data: { blogs, recentPosts, currentPage, numberOfPages },
 }) => {
     return (
         <>
@@ -49,8 +54,8 @@ const BlogGridSidebar: PageProps = ({
 
 BlogGridSidebar.Layout = Layout01;
 
-export const getStaticPaths: GetStaticPaths = async() => {
-    const { count } = await getAllBlogs([]);
+export const getStaticPaths: GetStaticPaths = async () => {
+    const { count } = await getAllBlogs();
     const pages = Math.ceil(count / POSTS_PER_PAGE);
 
     const pagesToGenerate = [...Array(pages).keys()]
@@ -74,17 +79,15 @@ interface Params extends ParsedUrlQuery {
     page: string;
 }
 
-export const getServerSideProps: GetServerSideProps<TProps, Params> = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<TProps, Params> = async ({
+    params,
+}) => {
     const page = params?.page;
     const currentPage = !page || Number.isNaN(+page) ? 1 : +page;
     const skip = (currentPage - 1) * POSTS_PER_PAGE;
-    const { blogs, count } = await getAllBlogs(
-        ["title", "slug", "image", "createdDate", "views"],
-        skip,
-        POSTS_PER_PAGE
-    );
+    const { blogs, count } = await getAllBlogs(skip, POSTS_PER_PAGE);
 
-    const { blogs: recentPosts } = await getAllBlogs(["title"], 0, 5);
+    const { blogs: recentPosts } = await getAllBlogs(0, 5);
     return {
         props: {
             data: {
