@@ -22,48 +22,47 @@ const makeExcerpt = (str: string | null | undefined, maxLength: number): string 
     return `${excerpt} ...`;
 };
 
-export async function getBlogById(
-    id: number,
+export async function getBlogById(id: number): Promise<IBlog> {
+    const blogData = await prisma.blogs.findUnique({
+        where: { id } as BlogsWhereUniqueInput,
+        include: {
+            Category: true,
+            Users: true,
+        },
+    });
 
-): Promise<IBlog> {
-
-    const blogData = await prisma.blogs.findUnique(
-        {
-            where: { id } as BlogsWhereUniqueInput,
-            include: {
-                Category: true,
-                Users: true
-            }
-        }
-    )
-    // const blogData = data as BlogType;
     if (!blogData) {
         // Handle case where the blog post is not found
-        throw new Error(`Blog post with slug ${id} not found.`);
+        throw new Error(`Blog post with id ${id} not found.`);
     }
+
+    const category = blogData.Category;
+    const user = blogData.Users;
+
     return {
         ...blogData,
-        createdDate: blogData.createdDate.toString(),
-        modifiedDate: blogData.modifiedDate.toString(),
+        createdDate: blogData.createdDate?.toString(),
+        modifiedDate: blogData.modifiedDate?.toString(),
         category: {
-            id: blogData.Category?.id,
-            name: blogData.Category?.name,
-            path: `/blogs/category/${blogData.Category?.name}`
+            id: category?.id,
+            name: category?.name,
+            path: category ? `/blogs/category/${category.name}` : '/',
         },
         author: {
             id: blogData.authorId,
-            firstName: blogData.Users?.firstName,
-            password: blogData.Users?.password,
-            phoneNumber: blogData.Users?.phoneNumber,
-            email: blogData.Users?.email,
-            createdDate: blogData.Users?.createdDate.toString(),
-            modifiedDate: blogData.Users?.modifiedDate?.toString(),
+            firstName: user?.firstName,
+            password: user?.password,
+            phoneNumber: user?.phoneNumber,
+            email: user?.email,
+            createdDate: user?.createdDate?.toString(),
+            modifiedDate: user?.modifiedDate?.toString(),
         },
         views: 2,
         excerpt: makeExcerpt(blogData?.content, 150),
-        path: `/blogs/${blogData.slug}`,
+        path: `/blogs/${blogData.id}?name=${blogData.slug}`,
     };
 }
+
 
 export async function getAllBlogs(
     skip = 0,
