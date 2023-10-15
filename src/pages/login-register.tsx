@@ -20,7 +20,7 @@ const LoginRegister: PageProps = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (!isLoggedIn) {
             void router.push("/profile");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,7 +28,7 @@ const LoginRegister: PageProps = () => {
 
     if (!mounted) return null;
 
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
         return (
             <>
                 <SEO title="Login Register" />
@@ -37,9 +37,13 @@ const LoginRegister: PageProps = () => {
                     currentPage="Profile"
                     showTitle={false}
                 />
-                <div className="tw-flex tw-justify-center  tw-bg-black">
-                    <LoginForm />
-                    {/* <RegisterForm /> */}
+                <div className=" tw-flex tw-justify-around">
+                    <div className=" tw-w-[470px]">
+                        <LoginForm />
+                    </div>
+                    <div className="tw-w-[570px] tw-mb-36">
+                        <RegisterForm />
+                    </div>
                 </div>
             </>
         );

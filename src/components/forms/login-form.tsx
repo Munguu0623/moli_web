@@ -30,15 +30,15 @@ const LoginForm = () => {
     });
 
     const onSubmit: SubmitHandler<IFormValues> = (data) => {
-        if (data.username === "Admin" && data.password === "Admin") {
-            setLogin();
-            setServerState("");
-            if (window?.history?.length > 2) {
-                router.back();
-            }
-        } else {
-            setServerState("Username or password is incorrect");
-        }
+        // if (data.username === "Admin" && data.password === "Admin") {
+        //     setLogin();
+        //     setServerState("");
+        //     if (window?.history?.length > 2) {
+        //         router.back();
+        //     }
+        // } else {
+        //     setServerState("Username or password is incorrect");
+        // }
     };
 
     return (
