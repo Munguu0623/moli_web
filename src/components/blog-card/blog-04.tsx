@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 import clsx from "clsx";
 import Anchor from "@ui/anchor";
 import { BlogMetaType, IBlog } from "@utils/types";
+import dayjs from "dayjs";
 
 type TProps = Pick<
     IBlog,
@@ -55,7 +56,7 @@ const BlogCard = forwardRef<HTMLDivElement, TProps>(
                     <ul className="tw-flex tw-gap-7 tw-text-gray-300 tw-text-md">
                         <li className="tw-mt-3.8 tw-mb-0">
                             <i className="far fa-calendar tw-mr-2.5" />
-                            {createdDate}
+                            {dayjs(createdDate).format("YYYY-MM-DD")}
                         </li>
                         <li className="tw-mt-3.8">
                             <i className="far fa-eye tw-mr-2.5" />

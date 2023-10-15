@@ -186,11 +186,20 @@ export interface IBlog {
     image: string;
     category: BlogMetaType;
     views: number;
-    authorId: number;
+    authorId: IAuthor;
     content: string | null;
     excerpt: string;
 }
+export interface IAuthor {
+    id: number;
+    firstName: string | null | undefined;
+    password: string
+    phoneNumber: string
+    email: string
+    createdDate: string
+    modifiedDate: string
 
+}
 export interface ISocial {
     label: string;
     icon: string;

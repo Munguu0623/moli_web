@@ -133,20 +133,7 @@ export async function getAllBlogs(
         skip,
         take: limit,
     })
-    // let blogs  IBlog
-    // const slugs = getSlugs(postsDirectory);
-    // let blogs = slugs
-    //     .map((slug) => getPostBySlug(slug, fields))
-    //     .sort((post1, post2) =>
-    //         new Date(post1.createdDate).getTime() >
-    //         new Date(post2.createdDate).getTime()
-    //             ? -1
-    //             : 1
-    //     );
-    // if (limit) blogs = blogs.slice(skip, skip + limit);
-    // let blogs = await Promise.all(
-    // blog.map((blog) => getBlogById(blog.id))
-    // );
+
     const blogtest = await Promise.all(
         blog.map((blog) => getBlogById(blog.id))
     );
@@ -228,4 +215,40 @@ export async function getPostsByAuthor(
     // const totalPosts = result.length;
     if (limit) blogs = blogs.slice(skip, skip + limit);
     return { posts: blogs, count: blogs.length };
+}
+
+
+export async function searchBlogs(
+    value: string
+): Promise<IBlog> {
+    // const postFields =
+    //     fields === "all"
+    //         ? "all"
+    //         : ([...fields, "author"] as Array<keyof IBlog>);
+    let blogs = await prisma.blogs.findMany({
+        where: {
+            OR: [{
+                content: {
+                    contains: value
+                },
+            },
+            {
+                title: {
+                    contains: value
+                }
+            }, {
+                Category: {
+                    name: { // Replace 'categoryName' with actual field name
+                        contains: value
+                    }
+                }
+            }]
+        },
+        include: {
+            Category: true,
+        },
+    });
+    // let result = blogs.filter((post) => post.authorId === authorID);
+    // const totalPosts = result.length;
+    return { blogs };
 }

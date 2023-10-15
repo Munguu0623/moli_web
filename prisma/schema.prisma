@@ -11,15 +11,15 @@ model Blogs {
   id           Int       @id @default(autoincrement())
   title        String
   slug         String
-  content      String?
+  content      String?   @db.NVarChar(Max)
   category     Int?
   type         String?
   authorId     Int
   modifiedDate DateTime
   image        String    @db.VarChar(255)
   createdDate  DateTime  @default(now())
+  Users        Users     @relation(fields: [authorId], references: [id])
   Category     Category? @relation(fields: [category], references: [id])
-  Users        Users?    @relation(fields: [authorId], references: [id])
 }
 
 model Category {
