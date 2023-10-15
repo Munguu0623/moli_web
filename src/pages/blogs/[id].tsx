@@ -34,7 +34,6 @@ type PageProps = NextPage<TProps> & {
 };
 
 const BlogDetails: PageProps = ({ data: { blog, recentPosts } }) => {
-    console.log("blog medee---->", blog);
     return (
         <>
             {/* <SEO
@@ -89,7 +88,6 @@ export const getServerSideProps: GetServerSideProps = async (
     }
 
     const blog = await getBlogById(Number(id));
-    console.log(blog, "----blog");
     //  const prevAndNextPost = getPrevNextPost(params.slug, [
     //     "title",
     //     "image",

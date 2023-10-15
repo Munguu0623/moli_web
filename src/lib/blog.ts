@@ -78,8 +78,6 @@ export async function getAllBlogs(
         skip,
         take: limit,
     })
-    console.log('blogs with user---->', blog)
-
     const blogtest = await Promise.all(
         blog.map((blog) => getBlogById(blog.id))
     );
