@@ -186,7 +186,7 @@ export interface IBlog {
     image: string;
     category: BlogMetaType;
     views: number;
-    authorId: number;
+    author: IAuthor;
     content: string | null;
     excerpt: string;
 }
@@ -207,6 +207,16 @@ export interface IInstructor {
     designation: string;
     bio: string;
     socials: ISocial[];
+}
+export interface IAuthor {
+    id: number;
+    firstName: string | null | undefined;
+    password: string | undefined
+    phoneNumber: string | null | undefined
+    email: string | null | undefined
+    createdDate: string | undefined
+    modifiedDate: string | undefined
+
 }
 
 export type FieldType<T> = Array<keyof T> | "all";

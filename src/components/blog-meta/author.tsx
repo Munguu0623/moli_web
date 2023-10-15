@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import Anchor from "@ui/anchor";
-import { IInstructor } from "@utils/types";
+import { IInstructor, IAuthor } from "@utils/types";
 
 type TProps = {
-    author: IInstructor;
+    author: IAuthor;
     className?: string;
 };
 

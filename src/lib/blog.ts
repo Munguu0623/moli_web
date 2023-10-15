@@ -33,18 +33,13 @@ export async function getBlogById(
     id: number,
 
 ): Promise<IBlog> {
-    // const realSlug = slug.replace(/\.md$/, "");
-    // const fullPath = join(postsDirectory, `${realSlug}.md`);
-    // const fileContents = JSON.parse(
-    //     JSON.stringify(fs.readFileSync(fullPath, "utf8"))
-    // ) as BlogType;
-    // const { data, content } = matter(fileContents);
 
     const blogData = await prisma.blogs.findUnique(
         {
             where: { id } as BlogsWhereUniqueInput,
             include: {
                 Category: true,
+                Users: true
             }
         }
     )
@@ -53,57 +48,6 @@ export async function getBlogById(
         // Handle case where the blog post is not found
         throw new Error(`Blog post with slug ${id} not found.`);
     }
-
-    // let blog: IBlog;
-
-    // if (fields === "all") {
-    // blog = {
-    //     ...blogData,
-    // category: {
-    //     title: blogData.category,
-    //     slug: slugify(blogData.category),
-    //     path: `/blogs/category/${slugify(blogData.category)}`,
-    // },
-    //     views:2,
-    //     path:"/",
-    //     createdDate:blogData.createdDate.toString(),
-    //     modifiedDate:blogData.modifiedDate.toString(),
-    //     excerpt: makeExcerpt(blogData?.content, 150),
-    //     authorId: getAuthorByID(blogData.authorId, "all"),
-    // };
-    // } else {
-    //     blog = fields.reduce((acc: IBlog, field: keyof IBlog) => {
-    //         console.log(acc)
-    //         if (field === "slug") {
-    //             return { ...acc, slug: slug };
-    //         }
-    //         if (field === "content") {
-    //             return { ...acc, [field]: blogData.content };
-    //         }
-    //         if (field === "excerpt") {
-    //             return { ...acc, excerpt: makeExcerpt(blogData.content, 150) };
-    //         }
-    //         if (field === "authorId") {
-    //             const author = getAuthorByID(blogData.authorId, "all");
-    //             return { ...acc, author };
-    //         }
-    //         if (field === "category") {
-    //             return {
-    //                 ...acc,
-    //                 category: {
-    //                     title: blogData.category,
-    //                     slug: slugify(blogData.category),
-    //                     path: `/blogs/category/${slugify(blogData.category)}`,
-    //                 },
-    //             };
-    //         }
-    //         // if (typeof data[field] !== "undefined") {
-    //         //     return { ...acc, [field]: blogData[field] };
-    //         // }
-    //         return acc;
-    //     }, <IBlog>{});
-    // }
-
     return {
         ...blogData,
         createdDate: blogData.createdDate.toString(),
@@ -112,6 +56,15 @@ export async function getBlogById(
             id: blogData.Category?.id,
             name: blogData.Category?.name,
             path: `/blogs/category/${blogData.Category?.name}`
+        },
+        author: {
+            id: blogData.authorId,
+            firstName: blogData.Users?.firstName,
+            password: blogData.Users?.password,
+            phoneNumber: blogData.Users?.phoneNumber,
+            email: blogData.Users?.email,
+            createdDate: blogData.Users?.createdDate.toString(),
+            modifiedDate: blogData.Users?.modifiedDate?.toString(),
         },
         views: 2,
         excerpt: makeExcerpt(blogData?.content, 150),
@@ -129,10 +82,12 @@ export async function getAllBlogs(
         },
         include: {
             Category: true,
+            Users: true,
         },
         skip,
         take: limit,
     })
+    console.log('blogs with user---->', blog)
     // let blogs  IBlog
     // const slugs = getSlugs(postsDirectory);
     // let blogs = slugs
