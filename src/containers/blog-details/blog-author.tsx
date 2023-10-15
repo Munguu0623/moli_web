@@ -1,10 +1,10 @@
 import Social, { SocialLink } from "@ui/social";
-import { IInstructor } from "@utils/types";
+import { IAuthor, IInstructor } from "@utils/types";
 
-const BlogAuthor = ({ name, image, bio, socials }: IInstructor) => {
+const BlogAuthor = ({ firstName }: IAuthor) => {
     return (
         <div className="blog-author tw-mt-10 tw-flex tw-flex-wrap tw-justify-center md:tw-justify-start">
-            <div className="tw-text-center tw-max-w-[140px] tw-min-w-[100px] tw-shrink-0">
+            {/* <div className="tw-text-center tw-max-w-[140px] tw-min-w-[100px] tw-shrink-0">
                 {image?.src && (
                     <img
                         alt={image?.alt || name}
@@ -32,12 +32,12 @@ const BlogAuthor = ({ name, image, bio, socials }: IInstructor) => {
                         ))}
                     </Social>
                 )}
-            </div>
+            </div> */}
             <div className="md:tw-w-[calc(100%_-_140px)] tw-text-center tw-pt-7.5 md:tw-text-left md:tw-pt-0 md:tw-pl-7.5">
                 <h3 className="tw-mb-[13px] tw-text-base tw-uppercase tw-tracking-wider">
-                    {name}
+                    {firstName}
                 </h3>
-                <p className="tw-mb-0">{bio}</p>
+                {/* <p className="tw-mb-0">{bio}</p> */}
             </div>
         </div>
     );

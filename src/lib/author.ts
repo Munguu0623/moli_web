@@ -42,7 +42,7 @@ export function getAllAuthors(fields: FieldType<IInstructor>, limit?: number) {
 }
 
 export function getAuthorByID(id: IDType, fields: FieldType<IInstructor>) {
-    const authrors = getAllAuthors(fields);
-    const author = authrors.find((item) => item.id === id);
+    const authors = getAllAuthors(fields);
+    const author = authors.find((item) => item.id === id);
     return author || ({} as IInstructor);
 }

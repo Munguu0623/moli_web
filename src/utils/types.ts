@@ -1,4 +1,4 @@
-export type IDType = string | number;
+export type IDType = number;
 
 export interface ImageType {
     src: string;
@@ -86,20 +86,20 @@ export interface IContent {
     id: IDType;
     text: string;
     type:
-        | "text"
-        | "heading"
-        | "iframe"
-        | "h3"
-        | "h4"
-        | "h5"
-        | "list"
-        | "order-list"
-        | "blockquote";
+    | "text"
+    | "heading"
+    | "iframe"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "list"
+    | "order-list"
+    | "blockquote";
     content:
-        | string
-        | { src: string; alt?: string }
-        | string[]
-        | ListContentType[];
+    | string
+    | { src: string; alt?: string }
+    | string[]
+    | ListContentType[];
 }
 
 export interface ReviewType {
@@ -172,8 +172,8 @@ export interface ICourse {
 }
 
 export interface BlogMetaType {
-    title: string;
-    slug: string;
+    id: number | undefined;
+    name: string | undefined;
     path: string;
 }
 
@@ -181,13 +181,13 @@ export interface IBlog {
     title: string;
     slug: string;
     path: string;
-    postedAt: string;
-    image: ImageType;
+    createdDate: string;
+    modifiedDate: string;
+    image: string;
     category: BlogMetaType;
-    tags: BlogMetaType[];
     views: number;
-    author: IInstructor;
-    content: string;
+    author: IAuthor;
+    content: string | null;
     excerpt: string;
 }
 
@@ -198,7 +198,7 @@ export interface ISocial {
 }
 
 export interface IInstructor {
-    id: IDType;
+    id: number;
     name: string;
     slug: string;
     path: string;
@@ -207,6 +207,16 @@ export interface IInstructor {
     designation: string;
     bio: string;
     socials: ISocial[];
+}
+export interface IAuthor {
+    id: number;
+    firstName: string | null | undefined;
+    password: string | undefined
+    phoneNumber: string | null | undefined
+    email: string | null | undefined
+    createdDate: string | undefined
+    modifiedDate: string | undefined
+
 }
 
 export type FieldType<T> = Array<keyof T> | "all";
@@ -294,15 +304,15 @@ export type TMenu = TSubMenu & {
 
 export type TSection = {
     space?:
-        | "top-bottom"
-        | "top-bottom-2"
-        | "top-bottom-3"
-        | "top"
-        | "top-2"
-        | "bottom"
-        | "bottom-2"
-        | "bottom-3"
-        | "none";
+    | "top-bottom"
+    | "top-bottom-2"
+    | "top-bottom-3"
+    | "top"
+    | "top-2"
+    | "bottom"
+    | "bottom-2"
+    | "bottom-3"
+    | "none";
     bg?: string;
     titleSize?: "default" | "large";
     className?: string;

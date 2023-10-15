@@ -34,7 +34,7 @@ const BlogArea = ({ data: { blogs } }: TProps) => {
                                     title={blog.title}
                                     path={blog.path}
                                     category={blog.category}
-                                    postedAt={blog.postedAt}
+                                    createdDate={blog.createdDate}
                                     views={blog.views}
                                     initial="offscreen"
                                     whileInView="onscreen"

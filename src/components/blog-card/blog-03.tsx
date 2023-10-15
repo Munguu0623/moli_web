@@ -2,28 +2,29 @@ import { forwardRef } from "react";
 import clsx from "clsx";
 import Anchor from "@ui/anchor";
 import { IBlog } from "@utils/types";
+import dayjs from "dayjs";
 
 type TProps = Pick<
     IBlog,
-    "image" | "path" | "title" | "category" | "postedAt" | "views"
+    "image" | "path" | "title" | "category" | "createdDate" | "views"
 > & {
     className?: string;
 };
 
 const BlogCard = forwardRef<HTMLDivElement, TProps>(
-    ({ className, image, path, title, category, postedAt, views }, ref) => {
+    ({ className, image, path, title, category, createdDate, views }, ref) => {
         return (
             <div className={clsx("blog-card tw-group", className)} ref={ref}>
                 <div className="tw-relative tw-overflow-hidden tw-rounded tw-h-[250px]">
-                    {image?.src && (
+                    {image && (
                         <figure className="tw-transition-transform tw-duration-1500 tw-h-full group-hover:tw-scale-110">
                             <img
                                 className="tw-w-full tw-h-full tw-object-cover"
-                                src={image.src}
-                                alt={image?.alt || "Event"}
-                                width={image.width || 480}
-                                height={image.height || 250}
-                                loading={image.loading || "lazy"}
+                                src={image}
+                                alt={"Event"}
+                                width={480}
+                                height={250}
+                                loading={"lazy"}
                             />
                         </figure>
                     )}
@@ -38,7 +39,7 @@ const BlogCard = forwardRef<HTMLDivElement, TProps>(
                             path={category.path}
                             className="tw-text-inherit"
                         >
-                            {category.title}
+                            {category.name}
                         </Anchor>
                     </div>
 
@@ -49,7 +50,7 @@ const BlogCard = forwardRef<HTMLDivElement, TProps>(
                     <ul className="tw-flex tw-gap-7 tw-text-gray-300 tw-text-md">
                         <li className="tw-mt-3.8 tw-mb-0">
                             <i className="far fa-calendar tw-mr-2.5" />
-                            {postedAt}
+                            {dayjs(createdDate).format("YYYY-MM-DD")}
                         </li>
                         <li className="tw-mt-3.8">
                             <i className="far fa-eye tw-mr-2.5" />

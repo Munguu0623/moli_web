@@ -1,7 +1,7 @@
 export default [
     {
         id: 1,
-        label: "Нүүр",
+        label: "Home",
         path: "/",
     },
     {
@@ -122,30 +122,8 @@ export default [
     },
     {
         id: 5,
-        label: "Влог",
-        path: "#!",
-        submenu: [
-            {
-                id: 51,
-                label: "Blog Grid",
-                path: "/blogs/blog-grid",
-            },
-            {
-                id: 52,
-                label: "Blog Grid Sidebar",
-                path: "/blogs/blog-grid-sidebar",
-            },
-            {
-                id: 53,
-                label: "Blog Classic",
-                path: "/blogs/blog-classic",
-            },
-            {
-                id: 54,
-                label: "Blog List",
-                path: "/blogs/blog-list",
-            },
-        ],
+        label: "Нийтлэл",
+        path: "/blogs/blog-grid-sidebar",
     },
     // {
     //     id: 6,

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import type { GetStaticProps, NextPage } from "next";
+import type { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import SEO from "@components/seo/page-seo";
 import Spinner from "@ui/spinner";
@@ -7,7 +7,7 @@ import Layout01 from "@layout/layout-01";
 import Breadcrumb from "@components/breadcrumb";
 import BlogArea from "@containers/blog-full/layout-05";
 import { IBlog } from "@utils/types";
-import { getAllBlogs } from "../../lib/blog";
+import { getAllBlogs, searchBlogs } from "../../lib/blog";
 
 type TProps = {
     data: {
@@ -32,8 +32,8 @@ const BlogSearch: PageProps = ({ data }) => {
                 const { title, category, content } = blog;
                 return (
                     title.toLowerCase().includes(search) ||
-                    category.title === search ||
-                    content.toLowerCase().includes(search)
+                    category.name === search ||
+                    content?.toLowerCase().includes(search)
                 );
             });
             setBlogs(filteredCourses);
@@ -71,15 +71,8 @@ const BlogSearch: PageProps = ({ data }) => {
 
 BlogSearch.Layout = Layout01;
 
-export const getStaticProps: GetStaticProps = () => {
-    const { blogs } = getAllBlogs([
-        "title",
-        "image",
-        "category",
-        "postedAt",
-        "views",
-        "content",
-    ]);
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const { blogs } = await searchBlogs(context.query.s as string);
 
     return {
         props: {

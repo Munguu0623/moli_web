@@ -43,6 +43,7 @@ export const slugify = (text: string): string => {
         .toLowerCase()
         .replace(/\s+/g, "-") // Replace spaces with -
         .replace(/[^\w-]+/g, "") // Remove all non-word chars
+        .replace(/[^-\w\u0400-\u04FF]+/g, "") // Keep Latin, Cyrillic & Mongolian characters
         .replace(/--+/g, "-") // Replace multiple - with single -
         .replace(/^-+/, "") // Trim - from start of text
         .replace(/-+$/, ""); // Trim - from end of text
@@ -81,7 +82,7 @@ export const courseSorting = (
         case "latest": {
             const sorted = cousesCopy.sort((a, b) =>
                 new Date(a.published_at).getTime() >
-                new Date(b.published_at).getTime()
+                    new Date(b.published_at).getTime()
                     ? -1
                     : 1
             );
@@ -166,11 +167,11 @@ export const minutesToHours = (minutes: number): string => {
 export const flatDeep = <T>(arr: any[], d = 1): T[] => {
     return d > 0
         ? arr.reduce((acc, val) => {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-              return acc.concat(
-                  Array.isArray(val) ? flatDeep<T>(val, d - 1) : val
-              );
-          }, [])
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+            return acc.concat(
+                Array.isArray(val) ? flatDeep<T>(val, d - 1) : val
+            );
+        }, [])
         : arr.slice();
 };
 

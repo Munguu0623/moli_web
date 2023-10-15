@@ -1,21 +1,21 @@
 import SearchWidget from "@widgets/search-widget";
 import RecentPostsWidget from "@widgets/recent-posts-widget";
 import BannerWidget from "@widgets/banner-widget";
-import PopularTagsWidget from "@widgets/popular-tags-widget";
 import { BlogMetaType, IBlog } from "@utils/types";
+import CategoryWidget from "@components/widgets/category-widget";
 
 type TProps = {
     recentPosts: Pick<IBlog, "title" | "path">[];
-    tags: BlogMetaType[];
+    category: BlogMetaType[];
 };
 
-const BlogSidebar = ({ recentPosts, tags }: TProps) => {
+const BlogSidebar = ({ recentPosts, category }: TProps) => {
     return (
         <>
             <SearchWidget />
             <RecentPostsWidget recentPosts={recentPosts} />
             <BannerWidget />
-            <PopularTagsWidget tags={tags} />
+            <CategoryWidget category={category} />
         </>
     );
 };

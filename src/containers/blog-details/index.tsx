@@ -3,7 +3,7 @@ import Anchor from "@ui/anchor";
 import AuthorMeta from "@components/blog-meta/author";
 import BlogMetaItem from "@components/blog-meta/meta-item";
 import SocialShare from "@components/social-share/layout-03";
-import TagMeta from "@components/blog-meta/tags";
+
 import MarkdownRenderer from "@components/markdown-renderer";
 import { IBlog } from "@utils/types";
 
@@ -12,27 +12,26 @@ const BlogDetails = ({
     title,
     category,
     author,
-    postedAt,
+    createdDate,
     views,
     content,
-    tags,
 }: IBlog) => {
     return (
         <article className="blog-details tw-pb-7.5 tw-mb-10 tw-border-b tw-border-b-gray-500">
             <div className="entry-header tw-mb-5">
-                {image?.src && (
+                {image && (
                     <figure className="tw-mb-7">
                         <img
                             className="tw-w-full tw-object-cover tw-rounded"
-                            src={image.src}
-                            alt={image?.alt || title}
+                            src={image}
+                            alt={title}
                             width="770"
                         />
                     </figure>
                 )}
 
                 <div className="tw-font-medium tw-uppercase -tw-tracking-tightest tw-mb-4">
-                    <Anchor path={category.path}>{category.title}</Anchor>
+                    <Anchor path={category.path}>{category.name}</Anchor>
                 </div>
 
                 <h2 className="tw-mb-5">{title}</h2>
@@ -43,7 +42,7 @@ const BlogDetails = ({
                     />
                     <BlogMetaItem
                         className="tw-pr-5 md:tw-pr-8"
-                        text={dayjs(postedAt).format("MMM DD, YYYY")}
+                        text={dayjs(createdDate).format("MMM DD, YYYY")}
                         icon="far fa-calendar"
                     />
                     <BlogMetaItem
@@ -63,7 +62,6 @@ const BlogDetails = ({
                 content={content}
             />
             <div className="entry-footer tw-flex tw-items-center tw-justify-center sm:tw-justify-between tw-flex-wrap">
-                <TagMeta tags={tags} />
                 <SocialShare
                     label="Share this post"
                     className="tw-mt-5 sm:tw-mt-0"

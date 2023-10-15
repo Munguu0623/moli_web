@@ -1,17 +1,25 @@
-import type { GetStaticPaths, NextPage } from "next";
+import type {
+    GetServerSideProps,
+    GetServerSidePropsContext,
+    NextPage,
+} from "next";
 import SEO from "@components/seo/page-seo";
 import Layout01 from "@layout/layout-01";
 import Breadcrumb from "@components/breadcrumb";
 import BlogArea from "@containers/blog-full/layout-02";
 import { unslugify, toCapitalize } from "@utils/methods";
 import { BlogMetaType, IBlog } from "@utils/types";
-import { getAllBlogs, getPostsByCategory, getTags } from "../../../../lib/blog";
+import {
+    getAllBlogs,
+    getAllCategories,
+    getBlogByCategory,
+} from "../../../../lib/blog";
 
 type TProps = {
     data: {
         blogs: IBlog[];
         recentPosts: IBlog[];
-        tags: BlogMetaType[];
+        category: BlogMetaType[];
         pageTitle: string;
         slug: string;
         currentPage: number;
@@ -29,7 +37,7 @@ const BlogCategoryPage: PageProps = ({
     data: {
         blogs,
         recentPosts,
-        tags,
+        category,
         pageTitle,
         slug,
         currentPage,
@@ -41,17 +49,17 @@ const BlogCategoryPage: PageProps = ({
             <SEO title={toCapitalize(pageTitle)} />
             <Breadcrumb
                 pages={[
-                    { path: "/", label: "home" },
-                    { path: "/blogs/blog-grid-sidebar", label: "blog" },
+                    { path: "/", label: "Нүүр" },
+                    { path: "/blogs/blog-grid-sidebar", label: "Мэргэжлүүд" },
                 ]}
                 currentPage={pageTitle}
-                title={`Category: ${pageTitle}`}
+                title={`Ангилал: ${pageTitle}`}
             />
             <BlogArea
                 data={{
                     blogs,
                     recentPosts,
-                    tags,
+                    category,
                     pagiData: {
                         currentPage,
                         numberOfPages,
@@ -65,41 +73,19 @@ const BlogCategoryPage: PageProps = ({
 
 BlogCategoryPage.Layout = Layout01;
 
-export const getStaticPaths: GetStaticPaths = () => {
-    const { blogs } = getAllBlogs(["category"]);
-    return {
-        paths: blogs.map(({ category }) => {
-            return {
-                params: {
-                    category: category.slug,
-                },
-            };
-        }),
-        fallback: false,
-    };
-};
-
-type Params = {
-    params: {
-        category: string;
-    };
-};
-
-export const getStaticProps = ({ params }: Params) => {
-    const { posts, count } = getPostsByCategory(
-        params.category,
-        ["title", "image", "category", "postedAt", "views"],
-        0,
-        POSTS_PER_PAGE
-    );
-    const { blogs: recentPosts } = getAllBlogs(["title"], 0, 5);
-    const tags = getTags();
+export const getServerSideProps: GetServerSideProps = async (
+    context: GetServerSidePropsContext
+) => {
+    const params = context.params as { category: string };
+    const { blogs, count } = await getBlogByCategory(params.category);
+    const { blogs: recentPosts } = await getAllBlogs(0, 5);
+    const { category } = await getAllCategories();
     return {
         props: {
             data: {
-                blogs: posts,
+                blogs,
                 recentPosts,
-                tags,
+                category,
                 pageTitle: unslugify(params.category),
                 slug: params.category,
                 currentPage: 1,
