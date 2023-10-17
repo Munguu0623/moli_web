@@ -33,8 +33,8 @@ const ContactMe: PageProps = ({ data }) => {
         <>
             <SEO title="Contact Us" />
             <Breadcrumb
-                pages={[{ path: "/", label: "home" }]}
-                currentPage="Contact Us"
+                pages={[{ path: "/", label: "Нүүр" }]}
+                currentPage="Бидэнтэй холбогдох"
                 showTitle={false}
             />
             <ContactInfo data={content?.["contact-info"]} />

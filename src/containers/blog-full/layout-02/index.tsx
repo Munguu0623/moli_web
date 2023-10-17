@@ -27,7 +27,7 @@ const BlogArea = ({
     console.log("pagiData---", pagiData);
     return (
         <Section className="blog-area" space="bottom">
-            <h2 className="tw-sr-only">Blog Section</h2>
+            <h2 className="tw-sr-only">Нийтлэлүүд</h2>
             <div className="tw-container tw-grid tw-grid-cols-3 tw-gap-10 xl:tw-gap-15">
                 <div className="tw-col-span-full lg:tw-col-[1/3]">
                     {blogs.length > 0 && (

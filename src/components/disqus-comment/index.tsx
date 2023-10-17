@@ -14,7 +14,7 @@ const DisqusComment = ({ id, title, className }: TProps) => {
         setHref(window.location.href);
     }, []);
 
-    const disqusShortname = "mitech-1";
+    const disqusShortname = "moli-1";
     const disqusConfig = {
         url: href,
         identifier: id,
@@ -23,11 +23,8 @@ const DisqusComment = ({ id, title, className }: TProps) => {
     return (
         <div className={cn("comments tw-pt-[75px]", className)}>
             <div className="tw-mb-7.5">
-                <h3 className="tw-mb-5">Leave your thought here</h3>
-                <p>
-                    Your email address will not be published. Required fields
-                    are marked *
-                </p>
+                <h3 className="tw-mb-5">Сэтгэгдлээ энд үлдээнэ үү</h3>
+                <p>Таны мэйл хаяг илгээгдэхгүй. Одтой талбарууд</p>
             </div>
             <DiscussionEmbed
                 shortname={disqusShortname}

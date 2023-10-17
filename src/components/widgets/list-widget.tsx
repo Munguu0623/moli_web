@@ -10,7 +10,7 @@ type TProps = {
 const ListWidget = ({ className, mode }: TProps) => {
     return (
         <div className={clsx(className)}>
-            <WidgetTitle mode={mode}>Information</WidgetTitle>
+            <WidgetTitle mode={mode}>Мэдээлэл</WidgetTitle>
             <ul
                 className={clsx(
                     "tw-text-md tw-font-medium",
@@ -18,16 +18,20 @@ const ListWidget = ({ className, mode }: TProps) => {
                 )}
             >
                 <li className="tw-pr-5 tw-mb-[11px]">
-                    <Anchor path="/membership-levels">Membership</Anchor>
+                    <Anchor path="/membership-levels">Гишүүнчлэл</Anchor>
                 </li>
                 <li className="tw-pr-5 tw-mb-[11px]">
-                    <Anchor path="/purchase-guide">Purchase guide</Anchor>
+                    <Anchor path="/purchase-guide">
+                        Худалдан авах мэдээлэл
+                    </Anchor>
                 </li>
                 <li className="tw-pr-5 tw-mb-[11px]">
-                    <Anchor path="/privacy-policy">Privacy policy</Anchor>
+                    <Anchor path="/privacy-policy">Нууцлалын бодлого</Anchor>
                 </li>
                 <li className="tw-pr-5 tw-mb-[11px]">
-                    <Anchor path="/terms-of-service">Terms of service</Anchor>
+                    <Anchor path="/terms-of-service">
+                        Үйлчилгээний нөхцөлүүд
+                    </Anchor>
                 </li>
             </ul>
         </div>

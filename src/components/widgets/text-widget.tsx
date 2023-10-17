@@ -10,7 +10,7 @@ type TProps = {
 const TextWidget = ({ className, mode }: TProps) => {
     return (
         <div className={clsx(className)}>
-            <WidgetTitle mode={mode}>Address</WidgetTitle>
+            <WidgetTitle mode={mode}>Хаяг</WidgetTitle>
             <div
                 className={clsx(
                     "content ",
@@ -18,10 +18,10 @@ const TextWidget = ({ className, mode }: TProps) => {
                 )}
             >
                 <p className="tw-mb-[11px]">
-                    382 NE 191st St # 87394 Miami, FL 33179-3899
+                    Баянгол дүүрэг, 11-р хороо, Хасбаатарын гудамж 36А
                 </p>
                 <p className="tw-mb-[11px]">
-                    +1 (305) 547-9909 (9am - 5pm EST, Monday - Friday){" "}
+                    +976 98989898 (12am - 11:59pm EST, Даваа - Баасан){" "}
                 </p>
                 <p className="tw-mb-[11px]">
                     <a
@@ -31,7 +31,7 @@ const TextWidget = ({ className, mode }: TProps) => {
                             mode === "dark" && "tw-text-gray-400"
                         )}
                     >
-                        info@example.com{" "}
+                        hureeinfivers@gmail.com{" "}
                     </a>
                 </p>
             </div>
