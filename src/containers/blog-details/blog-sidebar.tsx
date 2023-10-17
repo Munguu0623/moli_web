@@ -6,7 +6,7 @@ import CategoryWidget from "@components/widgets/category-widget";
 
 type TProps = {
     recentPosts: Pick<IBlog, "title" | "path">[];
-    category: BlogMetaType[];
+    category: BlogMetaType[] | undefined;
 };
 
 const BlogSidebar = ({ recentPosts, category }: TProps) => {

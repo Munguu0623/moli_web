@@ -10,11 +10,11 @@ import Layout01 from "@layout/layout-01";
 import Breadcrumb from "@components/breadcrumb";
 import BlogArea from "@containers/blog-full/layout-02";
 import { BlogMetaType, IBlog } from "@utils/types";
-import { getAllBlogs } from "../../../../lib/blog";
-
+import { getAllBlogs, getAllCategories } from "../../../../lib/blog";
 type TProps = {
     data: {
         blogs: IBlog[];
+        category?: BlogMetaType[];
         recentPosts: IBlog[];
         currentPage: number;
         numberOfPages: number;
@@ -79,7 +79,7 @@ interface Params extends ParsedUrlQuery {
     page: string;
 }
 
-export const getServerSideProps: GetServerSideProps<TProps, Params> = async ({
+export const getStaticProps: GetStaticProps<TProps, Params> = async ({
     params,
 }) => {
     const page = params?.page;
@@ -92,7 +92,8 @@ export const getServerSideProps: GetServerSideProps<TProps, Params> = async ({
         props: {
             data: {
                 blogs,
-                recentPostsx    
+
+                recentPosts,
                 currentPage,
                 numberOfPages: Math.ceil(count / POSTS_PER_PAGE),
             },

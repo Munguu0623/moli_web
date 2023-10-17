@@ -41,28 +41,28 @@ const ContactForm = forwardRef<HTMLFormElement, TProps>(
                 <div className="tw-grid tw-grid-cols-1 tw-gap-5 tw-mb-5 md:tw-grid-cols-2 md:tw-gap-7.5 md:tw-mb-7.5">
                     <div>
                         <label htmlFor="name" className="tw-sr-only">
-                            Name
+                            Нэр
                         </label>
                         <Input
                             id="name"
-                            placeholder="Your Name *"
+                            placeholder="Таны нэр *"
                             bg="light"
                             feedbackText={errors?.name?.message}
                             state={hasKey(errors, "name") ? "error" : "success"}
                             showState={!!hasKey(errors, "name")}
                             {...register("name", {
-                                required: "Name is required",
+                                required: "Нэр заавал оруулна уу!",
                             })}
                         />
                     </div>
                     <div>
                         <label htmlFor="email" className="tw-sr-only">
-                            email
+                            мэйл хаяг
                         </label>
                         <Input
                             type="email"
                             id="email"
-                            placeholder="Your Email *"
+                            placeholder="Мэйл хаяг *"
                             bg="light"
                             feedbackText={errors?.email?.message}
                             state={
@@ -70,7 +70,7 @@ const ContactForm = forwardRef<HTMLFormElement, TProps>(
                             }
                             showState={!!hasKey(errors, "email")}
                             {...register("email", {
-                                required: "Email is required",
+                                required: "Мэйл хаяг заавал оруулна уу!",
                                 pattern: {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                                     message: "invalid email address",
@@ -81,11 +81,11 @@ const ContactForm = forwardRef<HTMLFormElement, TProps>(
                 </div>
                 <div className="tw-mb-5 md:tw-mb-7.5">
                     <label htmlFor="subject" className="tw-sr-only">
-                        Subject
+                        Сэдэв
                     </label>
                     <Input
                         id="subject"
-                        placeholder="Subject *"
+                        placeholder="Сэдэв *"
                         bg="light"
                         feedbackText={errors?.subject?.message}
                         state={hasKey(errors, "subject") ? "error" : "success"}
@@ -97,22 +97,22 @@ const ContactForm = forwardRef<HTMLFormElement, TProps>(
                 </div>
                 <div className="tw-mb-5 md:tw-mb-7.5">
                     <label htmlFor="message" className="tw-sr-only">
-                        comment
+                        сэтгэгдэл
                     </label>
                     <Textarea
                         id="message"
-                        placeholder="Message"
+                        placeholder="Агуулга"
                         bg="light"
                         feedbackText={errors?.message?.message}
                         state={hasKey(errors, "message") ? "error" : "success"}
                         showState={!!hasKey(errors, "message")}
                         {...register("message", {
-                            required: "Message is required",
+                            required: "Агуулгаа заавал бичнэ үү!",
                         })}
                     />
                 </div>
                 <Button type="submit" className="tw-w-[180px]">
-                    Submit
+                    Илгээх
                 </Button>
                 {message && <Feedback state="success">{message}</Feedback>}
             </form>

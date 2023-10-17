@@ -33,13 +33,13 @@ const Footer01 = ({ mode }: TProps) => {
                     />
                 </div>
                 <p className="copyright tw-text-center tw-text-md tw-text-gray-400 tw-mt-5">
-                    &copy; {new Date().getFullYear()} Maxcoach.{" "}
+                    &copy; {new Date().getFullYear()} Моли.{"  "}
                     <a
                         target="_blank"
                         rel="noopener noreferrer"
                         href="https://themeforest.net/user/bootxperts/portfolio"
                     >
-                        All Rights Reserved
+                        Бүх эрх хуулиар хамгаалагдсан
                     </a>
                 </p>
             </div>

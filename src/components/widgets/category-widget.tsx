@@ -2,7 +2,7 @@ import Anchor from "@ui/anchor";
 import { BlogMetaType } from "@utils/types";
 
 type TProps = {
-    category: BlogMetaType[];
+    category: BlogMetaType[] | undefined;
 };
 
 const CategoryWidget = ({ category }: TProps) => {

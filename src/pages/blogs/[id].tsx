@@ -14,7 +14,12 @@ import DisqusComment from "@components/disqus-comment";
 import BlogSidebar from "@containers/blog-details/blog-sidebar";
 import { BlogMetaType, IAuthor, IBlog, IInstructor } from "@utils/types";
 import { toCapitalize } from "@utils/methods";
-import { getBlogById, getAllBlogs, getAllCategories } from "../../lib/blog";
+import {
+    getBlogById,
+    getAllBlogs,
+    getAllCategories,
+    getPrevNextPost,
+} from "../../lib/blog";
 import { PrismaClient } from "@prisma/client";
 
 type TProps = {
@@ -22,10 +27,10 @@ type TProps = {
         blog: IBlog;
         author: IAuthor;
         category: BlogMetaType[];
-        // prevAndNextPost: {
-        //     prevPost: IBlog;
-        //     nextPost: IBlog;
-        // };
+        prevAndNextPost: {
+            prevPost: IBlog;
+            nextPost: IBlog;
+        };
         recentPosts: IBlog[];
     };
 };
@@ -34,7 +39,9 @@ type PageProps = NextPage<TProps> & {
     Layout: typeof Layout01;
 };
 
-const BlogDetails: PageProps = ({ data: { blog, category, recentPosts } }) => {
+const BlogDetails: PageProps = ({
+    data: { blog, prevAndNextPost, category, recentPosts },
+}) => {
     return (
         <>
             {/* <SEO
@@ -63,8 +70,8 @@ const BlogDetails: PageProps = ({ data: { blog, category, recentPosts } }) => {
                 <div className="tw-col-span-full lg:tw-col-[1/3]">
                     <BlogDetailsArea {...blog} />
                     <BlogAuthor {...blog.author} />
-                    {/* <BlogNavLinks {...prevAndNextPost} /> */}
-                    {/* <DisqusComment id={blog.slug} title={blog.title} /> */}
+                    <BlogNavLinks {...prevAndNextPost} />
+                    <DisqusComment id={blog.slug} title={blog.title} />
                 </div>
                 <div className="tw-col-span-full lg:tw-col-[3/-1]">
                     <BlogSidebar
@@ -83,9 +90,9 @@ export const getServerSideProps: GetServerSideProps = async (
     context: GetServerSidePropsContext
 ) => {
     const { id } = context.params ?? {};
+    const slug = context.query.name as string;
 
     if (typeof id !== "string") {
-        // Handle the case where id is not a string (or not provided)
         return {
             notFound: true,
         };
@@ -93,12 +100,14 @@ export const getServerSideProps: GetServerSideProps = async (
     const { category } = await getAllCategories();
 
     const blog = await getBlogById(Number(id));
+    const prevAndNextPost = getPrevNextPost(slug);
     const { blogs: recentPosts } = await getAllBlogs(0, 5);
 
     return {
         props: {
             data: {
                 blog: JSON.parse(JSON.stringify(blog)),
+                prevAndNextPost: JSON.parse(JSON.stringify(prevAndNextPost)),
                 recentPosts,
                 category,
             },

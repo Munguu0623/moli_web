@@ -74,11 +74,12 @@ export async function getAllBlogs(
         skip,
         take: limit,
     })
+    const totalCount = await prisma.blogs.count();
     const blogtest = await Promise.all(
         blog.map((blog) => getBlogById(blog.id))
     );
     let blogs = JSON.parse(JSON.stringify(blogtest))
-    return { blogs, count: blogs.length };
+    return { blogs, count: totalCount };
 }
 
 export async function getPostsByAuthor(
@@ -159,4 +160,11 @@ export async function getAllCategories() {
     let category = await prisma.category.findMany();
 
     return { category };
+}
+export async function getPrevNextPost(slug: string) {
+    const { blogs } = await getAllBlogs();
+    const currentIndex = blogs.findIndex((blog: IBlog) => blog.slug === slug);
+    const prevPost = blogs[currentIndex - 1] || null;
+    const nextPost = blogs[currentIndex + 1] || null;
+    return { prevPost, nextPost };
 }
