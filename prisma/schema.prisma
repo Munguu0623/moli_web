@@ -52,7 +52,7 @@ model Users {
   password     String
   phoneNumber  String?   @db.NVarChar(100)
   email        String?   @unique @db.NVarChar(100)
-  createdDate  DateTime
-  modifiedDate DateTime?
+  createdDate  DateTime  @db.DateTime
+  modifiedDate DateTime? @db.DateTime
   blogs        Blogs[]
 }

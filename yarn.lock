@@ -4209,7 +4209,7 @@
   "resolved" "https://registry.npmjs.org/pretty-bytes/-/pretty-bytes-5.6.0.tgz"
   "version" "5.6.0"
 
-"prisma@*", "prisma@^5.3.1":
+"prisma@*":
   "integrity" "sha512-Wp2msQIlMPHe+5k5Od6xnsI/WNG7UJGgFUJgqv/ygc7kOECZapcSz/iU4NIEzISs3H1W9sFLjAPbg/gOqqtB7A=="
   "resolved" "https://registry.npmjs.org/prisma/-/prisma-5.3.1.tgz"
   "version" "5.3.1"
