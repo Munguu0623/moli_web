@@ -1,5 +1,5 @@
 export default {
-    name: "MaxCoach",
-    titleTemplate: "Online Learning React Education Template",
-    description: "Online Learning and Education React NextJS Template",
+    name: "Moli",
+    titleTemplate: "Мэргэжил сонголтын платформ",
+    description: "Мэргэжил сонголтод туслах вэбсайт",
 };

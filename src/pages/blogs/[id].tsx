@@ -44,17 +44,17 @@ const BlogDetails: PageProps = ({
 }) => {
     return (
         <>
-            {/* <SEO
+            <SEO
                 title={toCapitalize(blog.title)}
                 description="This is a mighty good description of this blog."
                 jsonLdType="article"
-                article={{
-                    publishedTime: blog.createdDate,
-                    modifiedTime: blog.createdDate,
-                    authors: [blog.author.firstName],
-                }}
-                image={`https://maxcoach-react.pages.dev${blog.image}`}
-            /> */}
+                // article={{
+                //     publishedTime: blog.createdDate,
+                //     modifiedTime: blog.createdDate,
+                //     // authors: [blog.author.firstName],
+                // }}
+                // image={`https://maxcoach-react.pages.dev${blog.image}`}
+            />
             <Breadcrumb
                 pages={[
                     { path: "/", label: "Нүүр" },

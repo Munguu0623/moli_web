@@ -67,7 +67,7 @@ const BlogArea = ({
                             title={blogs[0].title}
                             path={blogs[0].path}
                             category={blogs[0].category}
-                            postedAt={blogs[0].postedAt}
+                            postedAt={blogs[0].createdDate}
                             image={blogs[0].image}
                             views={blogs[0].views}
                         />
@@ -83,7 +83,7 @@ const BlogArea = ({
                             title={blogs[1].title}
                             path={blogs[1].path}
                             category={blogs[1].category}
-                            postedAt={blogs[1].postedAt}
+                            postedAt={blogs[1].createdDate}
                             image={blogs[1].image}
                             views={blogs[1].views}
                         />
@@ -99,7 +99,7 @@ const BlogArea = ({
                             title={blogs[2].title}
                             path={blogs[2].path}
                             category={blogs[2].category}
-                            postedAt={blogs[2].postedAt}
+                            postedAt={blogs[2].createdDate}
                             image={blogs[2].image}
                             views={blogs[2].views}
                         />
