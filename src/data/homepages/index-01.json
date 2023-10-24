@@ -222,8 +222,8 @@
         {
             "section": "event-area",
             "section_title": {
-                "title": "Upcoming <span>Events</span>",
-                "subtitle": "Get in contact now"
+                "title": "Удахгүй болох <span>Эвентүүд</span>",
+                "subtitle": "Хэрэгтэй мэдээллүүд"
             },
             "motto": {
                 "text": "Excited about our event?",
@@ -254,8 +254,8 @@
         {
             "section": "blog-area",
             "section_title": {
-                "title": "Secrets of learning revealed in blogs",
-                "subtitle": "study with your favorite tutors"
+                "title": "Мэргэжлүүдийн мэдээлэл",
+                "subtitle": "Суралцахыг хүссэн мэргэжлийнхээ дэлгэрэнгүй мэдээллийг эндээс"
             },
             "motto": {
                 "text": "Get into details now?",

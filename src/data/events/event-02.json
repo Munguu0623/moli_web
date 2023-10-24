@@ -1,6 +1,6 @@
 {
     "id": 2,
-    "title": "Painting Art Contest 2024",
+    "title": "Мэдээллийн технологийн мэргэжилтэн болоход яах хэрэгтэй вэ?",
     "thumbnail": {
         "src": "/images/event/02.jpg"
     },
@@ -10,8 +10,8 @@
     "end_time": "23:30:00",
     "venue": "4765 Commercial Drive, New Hartford NY 13413",
     "location": {
-        "city": "New York",
-        "country": "US",
+        "city": "Дархан",
+        "country": "Монгол улс",
         "zip": "20099",
         "latitude": 40.758062,
         "longitude": -73.9699129

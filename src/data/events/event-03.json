@@ -1,6 +1,6 @@
 {
     "id": 3,
-    "title": "International Art Fair 2024",
+    "title": "Карьер төлөвлөлт",
     "thumbnail": {
         "src": "/images/event/03.jpg"
     },
@@ -10,8 +10,8 @@
     "end_time": "21:30:00",
     "venue": "Betahaus Hamburg Schanze, Eifflerstraße 43",
     "location": {
-        "city": "Hamburg",
-        "country": "Germany",
+        "city": "Эрдэнэт",
+        "country": "Монгол улс",
         "zip": "20099",
         "latitude": 40.758062,
         "longitude": -73.9699129

@@ -1,6 +1,6 @@
 {
     "id": 4,
-    "title": "Street Performance: Call for Artist",
+    "title": "Дэлхийд хэрэгтэй мэргэжилтэн болох",
     "thumbnail": {
         "src": "/images/event/04.jpg"
     },
@@ -10,8 +10,8 @@
     "end_time": "21:30:00",
     "venue": "5555 North River Road Rosemont, IL 60018",
     "location": {
-        "city": "Illinois",
-        "country": "US",
+        "city": "Улаанбаатар",
+        "country": "Монгол улс",
         "zip": "20099",
         "latitude": 40.758062,
         "longitude": -73.9699129

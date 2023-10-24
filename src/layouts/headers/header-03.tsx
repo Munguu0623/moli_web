@@ -50,7 +50,7 @@ const Header = ({ shadow, fluid }: TProps) => {
                             <CountdownTimer tragetDate="2024/10/17" />
                         </div>
                         <Button size="xs" path="#!">
-                            Get ticket
+                            Тасалбар авах
                         </Button>
                     </div>
                 </div>

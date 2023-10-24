@@ -1,6 +1,6 @@
 {
     "id": 1,
-    "title": "Storytelling Workshop",
+    "title": "Мэргэжил сонголт уулзалт ярилцлага",
     "thumbnail": {
         "src": "/images/event/01.jpg"
     },
@@ -10,8 +10,8 @@
     "end_time": "22:30:00",
     "venue": "Betahaus Hamburg Schanze, Eifflerstraße 43",
     "location": {
-        "city": "New Jersey",
-        "country": "US",
+        "city": "Улаанбаатар",
+        "country": "Монгол Улс  ",
         "zip": "20099",
         "latitude": 40.758062,
         "longitude": -73.9699129

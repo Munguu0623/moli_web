@@ -45,7 +45,7 @@ const Event01 = forwardRef<HTMLDivElement, TProps>(
                             className="tw-text-primary"
                             path={path}
                         >
-                            Get ticket
+                            Тасалбар авах
                         </Button>
                     </div>
                 </div>
