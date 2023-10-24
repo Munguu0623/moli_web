@@ -23,7 +23,7 @@ const CourseArea = ({ data: { courses } }: TProps) => {
 
     return (
         <Section className="course-area" space="bottom">
-            <h2 className="tw-sr-only">Course Section</h2>
+            <h2 className="tw-sr-only">Сургалтын хэсэг</h2>
             <div className="tw-container">
                 {courses.length > 0 ? (
                     <>
@@ -56,12 +56,12 @@ const CourseArea = ({ data: { courses } }: TProps) => {
                                     <i className="fas fa-redo tw-ml-4" />
                                 </Button>
                             ) : (
-                                <p>No course to show</p>
+                                <p>Сургалт байхгүй байна</p>
                             )}
                         </div>
                     </>
                 ) : (
-                    <h6>No Course found</h6>
+                    <h6>Сургалт байхгүй байна</h6>
                 )}
             </div>
         </Section>

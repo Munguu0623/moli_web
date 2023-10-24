@@ -24,7 +24,6 @@ type TProps = {
 const BlogArea = ({
     data: { blogs, recentPosts, category, pagiData },
 }: TProps) => {
-    console.log("pagiData---", pagiData);
     return (
         <Section className="blog-area" space="bottom">
             <h2 className="tw-sr-only">Нийтлэлүүд</h2>

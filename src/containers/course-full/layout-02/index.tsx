@@ -29,7 +29,7 @@ const CourseArea = ({ data: { courses } }: TProps) => {
 
     return (
         <Section className="course-area" space="bottom">
-            <h2 className="tw-sr-only">Course Section</h2>
+            <h2 className="tw-sr-only">Сургалтын хэсэг</h2>
             <div className="tw-container">
                 <div className="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-items-center tw-mb-5">
                     <p className="tw-mb-2.5">
@@ -83,7 +83,7 @@ const CourseArea = ({ data: { courses } }: TProps) => {
                             Load More <i className="fas fa-redo tw-ml-4" />
                         </Button>
                     ) : (
-                        <p>No course to show</p>
+                        <p>Сургалт байхгүй байна</p>
                     )}
                 </div>
             </div>

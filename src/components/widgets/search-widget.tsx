@@ -36,7 +36,7 @@ const SearchWidget = ({ className }: TProps) => {
                     type="text"
                     className="tw-pr-[72px]"
                     value={search}
-                    placeholder="мэргэжил хайх"
+                    placeholder="хайх"
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 <button

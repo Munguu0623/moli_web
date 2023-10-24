@@ -2,19 +2,30 @@ import { motion } from "framer-motion";
 import Section from "@ui/section";
 import BlogCard from "@components/blog-card/blog-03";
 import Button from "@ui/button";
-import { IBlog } from "@utils/types";
+import { BlogMetaType, IBlog } from "@utils/types";
 import { scrollUpVariants } from "@utils/variants";
 import { useLoadMore } from "@hooks";
+import BlogSidebar from "@containers/blog-details/blog-sidebar";
+import Pagination from "@components/pagination/pagination-01";
 
 const AnimatedBlogCard = motion(BlogCard);
 
 type TProps = {
     data: {
         blogs: IBlog[];
+        recentPosts: IBlog[];
+        category: BlogMetaType[];
+        pagiData?: {
+            currentPage: number;
+            numberOfPages: number;
+            rootPage: string;
+        };
     };
 };
 
-const BlogArea = ({ data: { blogs } }: TProps) => {
+const BlogArea = ({
+    data: { blogs, recentPosts, category, pagiData },
+}: TProps) => {
     const { hasMore, itemsToShow, handlerLoadMore } = useLoadMore<IBlog>(
         blogs,
         6,
@@ -42,6 +53,14 @@ const BlogArea = ({ data: { blogs } }: TProps) => {
                                     variants={scrollUpVariants}
                                 />
                             ))}
+                            {pagiData && pagiData.numberOfPages > 1 && (
+                                <Pagination
+                                    className="tw-mt-[50px]"
+                                    numberOfPages={pagiData.numberOfPages}
+                                    currentPage={pagiData.currentPage}
+                                    rootPage={pagiData.rootPage}
+                                />
+                            )}
                         </div>
                         <div className="tw-text-center tw-mt-[50px]">
                             {hasMore ? (
@@ -54,12 +73,18 @@ const BlogArea = ({ data: { blogs } }: TProps) => {
                                     <i className="fas fa-redo tw-ml-4" />
                                 </Button>
                             ) : (
-                                <p>No course to show</p>
+                                <p>Сургалт байхгүй байна</p>
                             )}
                         </div>
+                        {/* <aside className="tw-col-span-full lg:tw-col-[3/-1]">
+                            <BlogSidebar
+                                recentPosts={recentPosts}
+                                category={category}
+                            />
+                        </aside> */}
                     </>
                 ) : (
-                    <h6>No Blog found</h6>
+                    <h6>Нийтлэл байхгүй байна</h6>
                 )}
             </div>
         </Section>

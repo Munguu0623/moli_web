@@ -1,4 +1,3 @@
-
 import { IBlog, IDType } from "@utils/types";
 
 import { Prisma, PrismaClient } from "@prisma/client";
@@ -8,9 +7,11 @@ type BlogsWhereUniqueInput = Prisma.BlogsWhereUniqueInput & {
     id: number;
 };
 
-
-const makeExcerpt = (str: string | null | undefined, maxLength: number): string => {
-    if (!str) return ""
+const makeExcerpt = (
+    str: string | null | undefined,
+    maxLength: number
+): string => {
+    if (!str) return "";
     if (str.length <= maxLength) {
         return str;
     }
@@ -42,7 +43,7 @@ export async function getBlogById(id: number): Promise<IBlog> {
         category: {
             id: category?.id,
             name: category?.name,
-            path: category ? `/blogs/category/${category.name}` : '/',
+            path: category ? `/blogs/category/${category.name}` : "/",
         },
         author: {
             id: blogData.authorId,
@@ -59,26 +60,22 @@ export async function getBlogById(id: number): Promise<IBlog> {
     };
 }
 
-
-export async function getAllBlogs(
-    skip = 0,
-    limit?: number
-) {
+export async function getAllBlogs(skip = 0, limit?: number) {
     const blog = await prisma.blogs.findMany({
         select: {
-            id: true
+            id: true,
         },
         orderBy: {
             createdDate: "desc",
         },
         skip,
         take: limit,
-    })
+    });
     const totalCount = await prisma.blogs.count();
     const blogtest = await Promise.all(
         blog.map((blog) => getBlogById(blog.id))
     );
-    let blogs = JSON.parse(JSON.stringify(blogtest))
+    let blogs = JSON.parse(JSON.stringify(blogtest));
     return { blogs, count: totalCount };
 }
 
@@ -89,71 +86,63 @@ export async function getPostsByAuthor(
 ) {
     let blogs = await prisma.blogs.findMany({
         where: {
-            authorId: authorID
-        }
+            authorId: authorID,
+        },
     });
 
     if (limit) blogs = blogs.slice(skip, skip + limit);
     return { posts: blogs, count: blogs.length };
 }
 
-
-export async function getBlogByCategory(
-    value: string
-) {
+export async function getBlogByCategory(value: string) {
     let blogs = await prisma.blogs.findMany({
         select: {
-            id: true, Category: true
+            id: true,
+            Category: true,
         },
         where: {
-
             Category: {
-                name: value
-            }
-
+                name: value,
+            },
         },
     });
-    let blogtest: IBlog[]
-    blogtest = await Promise.all(
-        blogs.map((blog) => getBlogById(blog.id))
-    );
-    const blog = JSON.parse(JSON.stringify(blogtest))
+    let blogtest: IBlog[];
+    blogtest = await Promise.all(blogs.map((blog) => getBlogById(blog.id)));
+    const blog = JSON.parse(JSON.stringify(blogtest));
     return { blogs: blog, count: blogtest.length };
 }
 
-
-
-export async function searchBlogs(
-    value: string
-) {
+export async function searchBlogs(value: string) {
     let blogs = await prisma.blogs.findMany({
         select: {
-            id: true, Category: true
+            id: true,
+            Category: true,
         },
         where: {
-            OR: [{
-                content: {
-                    contains: value
+            OR: [
+                {
+                    content: {
+                        contains: value,
+                    },
                 },
-            },
-            {
-                title: {
-                    contains: value
-                }
-            }, {
-                Category: {
-                    name: {
-                        contains: value
-                    }
-                }
-            }]
+                {
+                    title: {
+                        contains: value,
+                    },
+                },
+                {
+                    Category: {
+                        name: {
+                            contains: value,
+                        },
+                    },
+                },
+            ],
         },
     });
-    let blogtest: IBlog[]
-    blogtest = await Promise.all(
-        blogs.map((blog) => getBlogById(blog.id))
-    );
-    const blog = JSON.parse(JSON.stringify(blogtest))
+    let blogtest: IBlog[];
+    blogtest = await Promise.all(blogs.map((blog) => getBlogById(blog.id)));
+    const blog = JSON.parse(JSON.stringify(blogtest));
     return { blogs: blog };
 }
 export async function getAllCategories() {
